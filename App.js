@@ -31,10 +31,6 @@ export default function App(props) {
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
-      // TODO: Delete
-      require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
-      
       require('./assets/images/inventory/canned_foods.jpg'),
       require('./assets/images/inventory/eggs.jpg'),
       require('./assets/images/inventory/frozen.jpg'),
