@@ -10,4 +10,10 @@ npm-debug.*
 web-build/
 web-report/
 
+
+.DS_Store
+**/.DS_Store
+._.DS_Store
+**/._.DS_Store
+
 .watchmanconfig
