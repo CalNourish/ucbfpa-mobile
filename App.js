@@ -5,6 +5,8 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
+import { initializeFirebase } from './firebase/firebase';
+
 import AppNavigator from './navigation/AppNavigator';
 
 export default function App(props) {
@@ -48,6 +50,8 @@ async function loadResourcesAsync() {
       'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
     }),
   ]);
+
+  await initializeFirebase();
 }
 
 function handleLoadingError(error) {
