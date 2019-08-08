@@ -17,3 +17,5 @@ web-report/
 **/._.DS_Store
 
 .watchmanconfig
+
+environment.js

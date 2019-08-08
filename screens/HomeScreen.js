@@ -3,73 +3,100 @@ import {
   Image,
   ScrollView,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 
-export default function HomeScreen() {
-  return (
-    <View style={styles.container}>
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-        <View style={styles.welcomeContainer}>
-          <Image
-            source={
-              require('../assets/images/inventory/canned_foods.jpg')
-            }
-            style={styles.welcomeImage}
-          />
-          <Image
-            source={
-              require('../assets/images/inventory/eggs.jpg')
-            }
-            style={styles.welcomeImage}
-          />
-          <Image
-            source={
-              require('../assets/images/inventory/frozen.jpg')
-            }
-            style={styles.welcomeImage}
-          />
-          <Image
-            source={
-              require('../assets/images/inventory/grains.jpg')
-            }
-            style={styles.welcomeImage}
-          />
-          <Image
-            source={
-              require('../assets/images/inventory/milk.jpg')
-            }
-            style={styles.welcomeImage}
-          />
-          <Image
-            source={
-              require('../assets/images/inventory/sauces.jpeg')
-            }
-            style={styles.welcomeImage}
-          />
-          <Image
-            source={
-              require('../assets/images/inventory/spices.jpg')
-            }
-            style={styles.welcomeImage}
-          />
-          <Image
-            source={
-              require('../assets/images/inventory/yogurt.jpg')
-            }
-            style={styles.welcomeImage}
-          />
-        </View>
-      </ScrollView>
-    </View>
-  );
-}
+import * as firebase from 'firebase';
 
-HomeScreen.navigationOptions = {
-  header: null,
-};
+export default class HomeScreen extends React.Component {
+  static navigationOptions = {
+    header: null
+  };
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      inventory: ""
+    };
+  }
+
+  async componentDidMount() {
+    firebase
+      .database()
+      .ref('inventory')
+      .once('value')
+      .then(function(data) {
+        this.setState({
+          inventory: data.val()["1FNSA"].count
+        });
+      }.bind(this));
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <ScrollView
+          style={styles.container}
+          contentContainerStyle={styles.contentContainer}>
+          <View style={styles.welcomeContainer}>
+            <Image
+              source={
+                require('../assets/images/inventory/canned_foods.jpg')
+              }
+              style={styles.welcomeImage}
+            />
+  
+            <Text>{this.state.inventory}</Text>
+  
+            <Image
+              source={
+                require('../assets/images/inventory/eggs.jpg')
+              }
+              style={styles.welcomeImage}
+            />
+            <Image
+              source={
+                require('../assets/images/inventory/frozen.jpg')
+              }
+              style={styles.welcomeImage}
+            />
+            <Image
+              source={
+                require('../assets/images/inventory/grains.jpg')
+              }
+              style={styles.welcomeImage}
+            />
+            <Image
+              source={
+                require('../assets/images/inventory/milk.jpg')
+              }
+              style={styles.welcomeImage}
+            />
+            <Image
+              source={
+                require('../assets/images/inventory/sauces.jpeg')
+              }
+              style={styles.welcomeImage}
+            />
+            <Image
+              source={
+                require('../assets/images/inventory/spices.jpg')
+              }
+              style={styles.welcomeImage}
+            />
+            <Image
+              source={
+                require('../assets/images/inventory/yogurt.jpg')
+              }
+              style={styles.welcomeImage}
+            />
+          </View>
+        </ScrollView>
+      </View>
+    );
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
