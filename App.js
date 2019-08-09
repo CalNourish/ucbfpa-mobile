@@ -1,12 +1,15 @@
+import React, { useState } from 'react';
+import { Platform, StatusBar, StyleSheet, View } from 'react-native';
+
 import { AppLoading } from 'expo';
 import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
-import React, { useState } from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
-import { initializeFirebase } from './firebase/firebase';
+import firebase from 'firebase';
 
+import { getImage } from './constants/ImageFilepaths';
+import { initializeFirebase } from './firebase/firebase';
 import AppNavigator from './navigation/AppNavigator';
 
 export default function App(props) {
@@ -31,17 +34,21 @@ export default function App(props) {
 }
 
 async function loadResourcesAsync() {
+  await initializeFirebase();
+
+  var imageFileNames = [];
+  await firebase
+    .database()
+    .ref('category')
+    .once('value')
+    .then(function(data) {
+      data.forEach(function(childNodes) {
+        imageFileNames.push(getImage(childNodes.val()['fileName']));
+      });
+    });
+
   await Promise.all([
-    Asset.loadAsync([
-      require('./assets/images/inventory/canned_foods.jpg'),
-      require('./assets/images/inventory/eggs.jpg'),
-      require('./assets/images/inventory/frozen.jpg'),
-      require('./assets/images/inventory/grains.jpg'),
-      require('./assets/images/inventory/milk.jpg'),
-      require('./assets/images/inventory/sauces.jpeg'),
-      require('./assets/images/inventory/spices.jpg'),
-      require('./assets/images/inventory/yogurt.jpg'),
-    ]),
+    Asset.loadAsync(imageFileNames),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
       ...Ionicons.font,
@@ -50,8 +57,6 @@ async function loadResourcesAsync() {
       'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
     }),
   ]);
-
-  await initializeFirebase();
 }
 
 function handleLoadingError(error) {

@@ -9,6 +9,8 @@ import {
 
 import * as firebase from 'firebase';
 
+import { getImage } from '../constants/ImageFilepaths';
+
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
     header: null
@@ -17,12 +19,27 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      categories: [],
       inventory: ""
     };
   }
 
   async componentDidMount() {
-    firebase
+    var categories = [];
+    await firebase
+      .database()
+      .ref('category')
+      .once('value')
+      .then(function(data) {
+        data.forEach(function(childNodes) {
+          categories.push(getImage(childNodes.val()['fileName']));
+        });
+        this.setState({
+          categories: categories
+        });
+      }.bind(this));
+
+      await firebase
       .database()
       .ref('inventory')
       .once('value')
@@ -33,6 +50,15 @@ export default class HomeScreen extends React.Component {
       }.bind(this));
   }
 
+  renderCategories() {
+    return this.state.categories.map((category) => (
+      <Image
+        source={category}
+        style={styles.welcomeImage}
+      />
+    ));
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -40,57 +66,8 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                require('../assets/images/inventory/canned_foods.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-  
             <Text>{this.state.inventory}</Text>
-  
-            <Image
-              source={
-                require('../assets/images/inventory/eggs.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/frozen.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/grains.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/milk.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/sauces.jpeg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/spices.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/yogurt.jpg')
-              }
-              style={styles.welcomeImage}
-            />
+            {this.renderCategories()}
           </View>
         </ScrollView>
       </View>
