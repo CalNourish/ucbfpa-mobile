@@ -19,44 +19,49 @@ export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      categories: [],
+      categories: {},
       inventory: ""
     };
   }
 
   async componentDidMount() {
-    var categories = [];
+    var categories = {};
     await firebase
       .database()
       .ref('category')
       .once('value')
       .then(function(data) {
         data.forEach(function(childNodes) {
-          categories.push(getImage(childNodes.val()['fileName']));
+          categories[childNodes.key] = getImage(childNodes.val()['fileName']);
         });
         this.setState({
           categories: categories
         });
       }.bind(this));
 
-      await firebase
-      .database()
-      .ref('inventory')
-      .once('value')
-      .then(function(data) {
-        this.setState({
-          inventory: data.val()["1FNSA"].count
-        });
-      }.bind(this));
+      // await firebase
+      // .database()
+      // .ref('inventory')
+      // .once('value')
+      // .then(function(data) {
+      //   this.setState({
+      //     inventory: data.val()["1FNSA"].count
+      //   });
+      // }.bind(this));
   }
 
   renderCategories() {
-    return this.state.categories.map((category) => (
-      <Image
-        source={category}
-        style={styles.welcomeImage}
-      />
-    ));
+    var categoryImages = [];
+    Object.entries(this.state.categories).map(([categoryName, image]) => {
+      categoryImages.push(
+        <Image
+          key={categoryName}
+          source={image}
+          style={styles.welcomeImage}
+        />
+      );
+    });
+    return categoryImages;
   }
 
   render() {
