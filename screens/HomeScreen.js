@@ -23,8 +23,6 @@ export default class HomeScreen extends React.Component {
     this.state = {
       categories: {}
     };
-
-    this.onPressCategory = this.onPressCategory.bind(this);
   }
 
   async componentDidMount() {
@@ -43,8 +41,8 @@ export default class HomeScreen extends React.Component {
       }.bind(this));
   }
 
-  onPressCategory() {
-    this.props.navigation.navigate('Inventory');
+  onPressCategory(categoryName) {
+    this.props.navigation.navigate('Inventory', { category: categoryName });
   }
 
   renderCategories() {
@@ -52,7 +50,7 @@ export default class HomeScreen extends React.Component {
     Object.entries(this.state.categories).map(([categoryName, image]) => {
       categoryImages.push(
         <TouchableHighlight
-          onPress={this.onPressCategory}
+          onPress={this.onPressCategory.bind(this, categoryName)}
           key={categoryName}>
           <ImageBackground
             source={image}

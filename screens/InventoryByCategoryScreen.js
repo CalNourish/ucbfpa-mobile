@@ -10,18 +10,16 @@ import * as firebase from 'firebase';
 
 export default class InventoryByCategoryScreen extends React.Component {
   static navigationOptions = {
-    header: null,
-    // title: null
+    header: null
   };
 
   constructor(props) {
     super(props);
 
     this.state = {
+      category: this.props.navigation.state.params.category,
       inventory: {}
     };
-
-    // this.onPressCategory = this.onPressCategory.bind(this);
   }
 
   async componentDidMount() {
@@ -33,12 +31,13 @@ export default class InventoryByCategoryScreen extends React.Component {
       .then(function(data) {
         data.forEach(function(childNodes) {
           var item = childNodes.val();
-          inventory[item['itemName']] = item['count'];
-        });
+          if (item['categoryName'][this.state.category] !== undefined) {
+            inventory[item['itemName']] = item['count'];
+          }
+        }.bind(this));
         this.setState({
           inventory: inventory
         });
-        console.log(this.state.inventory);
       }.bind(this));
   }
 
