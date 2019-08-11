@@ -21,8 +21,7 @@ export default class HomeScreen extends React.Component {
     super(props);
 
     this.state = {
-      categories: {},
-      inventory: ""
+      categories: {}
     };
 
     this.onPressCategory = this.onPressCategory.bind(this);
@@ -42,20 +41,10 @@ export default class HomeScreen extends React.Component {
           categories: categories
         });
       }.bind(this));
-
-      // await firebase
-      // .database()
-      // .ref('inventory')
-      // .once('value')
-      // .then(function(data) {
-      //   this.setState({
-      //     inventory: data.val()["1FNSA"].count
-      //   });
-      // }.bind(this));
   }
 
   onPressCategory() {
-    this.props.navigation.navigate('LinksStack');
+    this.props.navigation.navigate('Inventory');
   }
 
   renderCategories() {
@@ -83,7 +72,6 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            <Text>{this.state.inventory}</Text>
             {this.renderCategories()}
           </View>
         </ScrollView>
