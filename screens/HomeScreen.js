@@ -1,9 +1,10 @@
 import React from 'react';
 import {
-  Image,
+  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native';
 
@@ -18,10 +19,13 @@ export default class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
       categories: {},
       inventory: ""
     };
+
+    this.onPressCategory = this.onPressCategory.bind(this);
   }
 
   async componentDidMount() {
@@ -50,15 +54,23 @@ export default class HomeScreen extends React.Component {
       // }.bind(this));
   }
 
+  onPressCategory() {
+    this.props.navigation.navigate('LinksStack');
+  }
+
   renderCategories() {
     var categoryImages = [];
     Object.entries(this.state.categories).map(([categoryName, image]) => {
       categoryImages.push(
-        <Image
-          key={categoryName}
-          source={image}
-          style={styles.welcomeImage}
-        />
+        <TouchableHighlight
+          onPress={this.onPressCategory}
+          key={categoryName}>
+          <ImageBackground
+            source={image}
+            style={styles.welcomeImage}>
+            <Text style={styles.innerText}>{categoryName}</Text>
+          </ImageBackground>
+        </TouchableHighlight>
       );
     });
     return categoryImages;
