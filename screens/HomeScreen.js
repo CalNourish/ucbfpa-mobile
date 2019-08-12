@@ -1,13 +1,16 @@
 import React from 'react';
 import {
-  Image,
+  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
+  TouchableHighlight,
   View,
 } from 'react-native';
 
 import * as firebase from 'firebase';
+
+import { getImage } from '../constants/ImageFilepaths';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -16,21 +19,52 @@ export default class HomeScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      inventory: ""
+      categories: {}
     };
   }
 
   async componentDidMount() {
-    firebase
+    var categories = {};
+    await firebase
       .database()
-      .ref('inventory')
+      .ref('category')
       .once('value')
       .then(function(data) {
+        data.forEach(function(childNode) {
+          var category = childNode.val();
+          categories[childNode.key] = {
+            categoryImage: getImage(category['fileName']),
+            categoryDisplayName: category['displayName']
+          };
+        });
         this.setState({
-          inventory: data.val()["1FNSA"].count
+          categories: categories
         });
       }.bind(this));
+  }
+
+  onPressCategory(categoryKey) {
+    this.props.navigation.navigate('Inventory', { category: categoryKey });
+  }
+
+  renderCategories() {
+    var categoryImages = [];
+    Object.entries(this.state.categories).map(([categoryName, category]) => {
+      categoryImages.push(
+        <TouchableHighlight
+          onPress={this.onPressCategory.bind(this, categoryName)}
+          key={categoryName}>
+          <ImageBackground
+            source={category['categoryImage']}
+            style={styles.welcomeImage}>
+            <Text style={styles.innerText}>{category['categoryDisplayName']}</Text>
+          </ImageBackground>
+        </TouchableHighlight>
+      );
+    });
+    return categoryImages;
   }
 
   render() {
@@ -40,57 +74,7 @@ export default class HomeScreen extends React.Component {
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
           <View style={styles.welcomeContainer}>
-            <Image
-              source={
-                require('../assets/images/inventory/canned_foods.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-  
-            <Text>{this.state.inventory}</Text>
-  
-            <Image
-              source={
-                require('../assets/images/inventory/eggs.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/frozen.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/grains.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/milk.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/sauces.jpeg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/spices.jpg')
-              }
-              style={styles.welcomeImage}
-            />
-            <Image
-              source={
-                require('../assets/images/inventory/yogurt.jpg')
-              }
-              style={styles.welcomeImage}
-            />
+            {this.renderCategories()}
           </View>
         </ScrollView>
       </View>
