@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import * as firebase from 'firebase';
+import { Icon } from 'react-native-elements';
 
 const win = Dimensions.get('window');
 
@@ -23,12 +24,14 @@ export default class InventoryByCategoryScreen extends React.Component {
 
     this.state = {
       category: this.props.navigation.state.params.category,
-      inventory: {}
+      inventory: {},
+      categoryDisplayName: null,
     };
   }
 
   async componentDidMount() {
     var inventory = {};
+
     await firebase
       .database()
       .ref('inventory')
@@ -44,6 +47,17 @@ export default class InventoryByCategoryScreen extends React.Component {
           inventory: inventory
         });
       }.bind(this));
+
+    await firebase
+    .database()
+    .ref('category/'+ this.state.category)
+    .once('value')
+    .then(function(data) {
+      var categoryVal = data.val();
+      this.setState({
+        categoryDisplayName: categoryVal['displayName']
+      });
+    }.bind(this));
   }
 
   renderInventory() {
@@ -53,8 +67,17 @@ export default class InventoryByCategoryScreen extends React.Component {
         <TouchableOpacity 
           key={itemName}
           style={styles.touchable}>
-          <Text style={styles.itemName}> {itemName}</Text>
-          <Text style={styles.itemCount}> {itemCount} in stock </Text>
+          <View style={styles.iconHolder}>
+            <Icon
+              name='food-apple-outline'
+              type='material-community'
+              size = {30} />
+          </View>
+          <View style={styles.iconHolder}>
+            <Text style={styles.itemName}> {itemName}</Text>
+            <Text style={styles.itemCount}> {itemCount} in stock </Text>
+          </View>
+         
         </TouchableOpacity>
         
       );
@@ -65,6 +88,11 @@ export default class InventoryByCategoryScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View>
+          <Text style={styles.categoryName}>
+          {this.state.categoryDisplayName} 
+        </Text>
+        </View>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
@@ -80,11 +108,9 @@ export default class InventoryByCategoryScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingTop: 30,
   },
   welcomeContainer: {
     alignItems: 'center',
@@ -92,6 +118,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   touchable: {
+    flexDirection: "row",
     height: 80,
     width: win.width - 20,
     justifyContent: 'flex-start',
@@ -100,23 +127,35 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 10,
+    alignContent: 'center'
   },
   itemName: {
     color: '#000000',
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'left',
-    marginStart: 10,
-    marginTop:10,
     justifyContent: 'flex-start',
   },
   itemCount: {
     color: '#000000',
     fontSize: 14,
-    fontWeight: 'bold',
     textAlign: 'left',
-    marginStart: 10,
     marginTop:10,
     justifyContent: 'flex-start',
   },
+  iconHolder: {
+    justifyContent: "center",
+    marginLeft: 10,
+    
+  },
+  categoryName: {
+    color: '#000000',
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginStart: 10,
+    marginTop:30,
+    marginBottom:10,
+    justifyContent: 'flex-start',
+  }
 });
