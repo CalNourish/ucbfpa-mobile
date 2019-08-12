@@ -3,10 +3,15 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  View
+  View,
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 
 import * as firebase from 'firebase';
+
+const win = Dimensions.get('window');
+
 
 export default class InventoryByCategoryScreen extends React.Component {
   static navigationOptions = {
@@ -45,11 +50,13 @@ export default class InventoryByCategoryScreen extends React.Component {
     var itemRows = [];
     Object.entries(this.state.inventory).map(([itemName, itemCount]) => {
       itemRows.push(
-        <Text
-          style={styles.innerText}
-          key={itemName}>
-          {itemName} - Count: {itemCount}
-        </Text>
+        <TouchableOpacity 
+          key={itemName}
+          style={styles.touchable}>
+          <Text style={styles.itemName}> {itemName}</Text>
+          <Text style={styles.itemCount}> {itemCount} in stock </Text>
+        </TouchableOpacity>
+        
       );
     });
     return itemRows;
@@ -83,5 +90,33 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
+  },
+  touchable: {
+    height: 80,
+    width: win.width - 20,
+    justifyContent: 'flex-start',
+    borderRadius: 10,
+    backgroundColor: '#F0F0F0',
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  itemName: {
+    color: '#000000',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginStart: 10,
+    marginTop:10,
+    justifyContent: 'flex-start',
+  },
+  itemCount: {
+    color: '#000000',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginStart: 10,
+    marginTop:10,
+    justifyContent: 'flex-start',
   },
 });

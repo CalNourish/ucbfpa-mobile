@@ -5,12 +5,23 @@ import {
   StyleSheet,
   Text,
   TouchableHighlight,
+  TouchableOpacity,
   View,
+  Image,
+  Dimensions,
 } from 'react-native';
+
+import {
+  Card,
+  Icon
+} from 'react-native-elements';
+
 
 import * as firebase from 'firebase';
 
 import { getImage } from '../constants/ImageFilepaths';
+
+const win = Dimensions.get('window');
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -53,15 +64,18 @@ export default class HomeScreen extends React.Component {
     var categoryImages = [];
     Object.entries(this.state.categories).map(([categoryName, category]) => {
       categoryImages.push(
-        <TouchableHighlight
-          onPress={this.onPressCategory.bind(this, categoryName)}
-          key={categoryName}>
-          <ImageBackground
-            source={category['categoryImage']}
-            style={styles.welcomeImage}>
-            <Text style={styles.innerText}>{category['categoryDisplayName']}</Text>
-          </ImageBackground>
-        </TouchableHighlight>
+        <TouchableOpacity 
+          key={categoryName}
+          style={styles.touchable}
+          onPress={this.onPressCategory.bind(this, categoryName)}>
+            <ImageBackground
+              source={category['categoryImage']}
+              style={styles.image}
+              > 
+              <Text style={styles.text}> {category['categoryDisplayName']}</Text>
+            </ImageBackground>
+
+        </TouchableOpacity>
       );
     });
     return categoryImages;
@@ -101,5 +115,39 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
+  },
+  categoryCard: {
+    width: 400,
+    height: 80,
+    backgroundColor: '#fff',
+  },
+  touchable: {
+    height: 80,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#febd40',
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  view: {
+    position: 'absolute',
+    backgroundColor: 'transparent'
+  },
+  image: {
+    height: 80,
+    width: win.width - 20,
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  text: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginStart: 10,
+    justifyContent: 'flex-start',
   },
 });
