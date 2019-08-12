@@ -29,8 +29,8 @@ export default class InventoryByCategoryScreen extends React.Component {
       .ref('inventory')
       .once('value')
       .then(function(data) {
-        data.forEach(function(childNodes) {
-          var item = childNodes.val();
+        data.forEach(function(childNode) {
+          var item = childNode.val();
           if (item['categoryName'][this.state.category] !== undefined) {
             inventory[item['itemName']] = item['count'];
           }

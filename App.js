@@ -42,8 +42,8 @@ async function loadResourcesAsync() {
     .ref('category')
     .once('value')
     .then(function(data) {
-      data.forEach(function(childNodes) {
-        imageFileNames.push(getImage(childNodes.val()['fileName']));
+      data.forEach(function(childNode) {
+        imageFileNames.push(getImage(childNode.val()['fileName']));
       });
     });
 

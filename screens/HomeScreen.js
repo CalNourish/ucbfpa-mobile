@@ -32,8 +32,12 @@ export default class HomeScreen extends React.Component {
       .ref('category')
       .once('value')
       .then(function(data) {
-        data.forEach(function(childNodes) {
-          categories[childNodes.key] = getImage(childNodes.val()['fileName']);
+        data.forEach(function(childNode) {
+          var category = childNode.val();
+          categories[childNode.key] = {
+            categoryImage: getImage(category['fileName']),
+            categoryDisplayName: category['displayName']
+          };
         });
         this.setState({
           categories: categories
@@ -41,21 +45,21 @@ export default class HomeScreen extends React.Component {
       }.bind(this));
   }
 
-  onPressCategory(categoryName) {
-    this.props.navigation.navigate('Inventory', { category: categoryName });
+  onPressCategory(categoryKey) {
+    this.props.navigation.navigate('Inventory', { category: categoryKey });
   }
 
   renderCategories() {
     var categoryImages = [];
-    Object.entries(this.state.categories).map(([categoryName, image]) => {
+    Object.entries(this.state.categories).map(([categoryName, category]) => {
       categoryImages.push(
         <TouchableHighlight
           onPress={this.onPressCategory.bind(this, categoryName)}
           key={categoryName}>
           <ImageBackground
-            source={image}
+            source={category['categoryImage']}
             style={styles.welcomeImage}>
-            <Text style={styles.innerText}>{categoryName}</Text>
+            <Text style={styles.innerText}>{category['categoryDisplayName']}</Text>
           </ImageBackground>
         </TouchableHighlight>
       );
