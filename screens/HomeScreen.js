@@ -4,24 +4,14 @@ import {
   ScrollView,
   StyleSheet,
   Text,
-  TouchableHighlight,
   TouchableOpacity,
   View,
-  Image,
   Dimensions,
 } from 'react-native';
-
-import {
-  Card,
-  Icon
-} from 'react-native-elements';
-
 
 import * as firebase from 'firebase';
 
 import { getImage } from '../constants/ImageFilepaths';
-
-const win = Dimensions.get('window');
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -70,11 +60,9 @@ export default class HomeScreen extends React.Component {
           onPress={this.onPressCategory.bind(this, categoryName)}>
             <ImageBackground
               source={category['categoryImage']}
-              style={styles.image}
-              > 
-              <Text style={styles.text}> {category['categoryDisplayName']}</Text>
+              style={styles.image}>
+              <Text style={styles.text}>{category['categoryDisplayName']}</Text>
             </ImageBackground>
-
         </TouchableOpacity>
       );
     });
@@ -96,6 +84,7 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,

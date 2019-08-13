@@ -7,12 +7,9 @@ import {
   TouchableOpacity,
   Dimensions
 } from 'react-native';
-
-import * as firebase from 'firebase';
 import { Icon } from 'react-native-elements';
 
-const win = Dimensions.get('window');
-
+import * as firebase from 'firebase';
 
 export default class InventoryByCategoryScreen extends React.Component {
   static navigationOptions = {
@@ -77,9 +74,7 @@ export default class InventoryByCategoryScreen extends React.Component {
             <Text style={styles.itemName}> {itemName}</Text>
             <Text style={styles.itemCount}> {itemCount} in stock </Text>
           </View>
-         
         </TouchableOpacity>
-        
       );
     });
     return itemRows;
@@ -105,6 +100,7 @@ export default class InventoryByCategoryScreen extends React.Component {
   }
 }
 
+const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
