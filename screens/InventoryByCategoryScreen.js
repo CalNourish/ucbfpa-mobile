@@ -1,18 +1,15 @@
 import React from 'react';
 import {
+  Dimensions,
   ScrollView,
   StyleSheet,
   Text,
-  View,
   TouchableOpacity,
-  Dimensions
+  View,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 
 import * as firebase from 'firebase';
-
-const win = Dimensions.get('window');
-
 
 export default class InventoryByCategoryScreen extends React.Component {
   static navigationOptions = {
@@ -24,8 +21,8 @@ export default class InventoryByCategoryScreen extends React.Component {
 
     this.state = {
       category: this.props.navigation.state.params.category,
-      inventory: {},
       categoryDisplayName: this.props.navigation.state.params.categoryDisplayName,
+      inventory: {},
     };
   }
 
@@ -60,11 +57,12 @@ export default class InventoryByCategoryScreen extends React.Component {
             <Icon
               name='food-apple-outline'
               type='material-community'
-              size = {30} />
+              size={30}
+            />
           </View>
           <View style={styles.iconHolder}>
-            <Text style={styles.itemName}> {itemName}</Text>
-            <Text style={styles.itemCount}> {itemCount} in stock </Text>
+            <Text style={styles.itemName}>{itemName}</Text>
+            <Text style={styles.itemCount}>{itemCount} in stock</Text>
           </View>
         </TouchableOpacity>
       );
@@ -76,9 +74,7 @@ export default class InventoryByCategoryScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View>
-          <Text style={styles.categoryName}>
-          {this.state.categoryDisplayName} 
-        </Text>
+          <Text style={styles.categoryName}>{this.state.categoryDisplayName}</Text>
         </View>
         <ScrollView
           style={styles.container}
@@ -92,6 +88,7 @@ export default class InventoryByCategoryScreen extends React.Component {
   }
 }
 
+const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,

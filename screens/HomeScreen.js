@@ -23,7 +23,6 @@ export default class HomeScreen extends React.Component {
 
     this.state = {
       categories: {},
-      categoryDisplayName: null
     };
   }
 
@@ -48,21 +47,26 @@ export default class HomeScreen extends React.Component {
   }
 
   onPressCategory(categoryKey, displayName) {
-    this.props.navigation.navigate('Inventory', { category: categoryKey, categoryDisplayName: displayName});
+    this.props.navigation.navigate('Inventory', {
+      category: categoryKey,
+      categoryDisplayName: displayName,
+    });
   }
 
   renderCategories() {
     var categoryImages = [];
-    Object.entries(this.state.categories).map(([categoryName, category]) => {
+    Object.entries(this.state.categories).map(([categoryKey, category]) => {
+      var categoryDisplayName = category['categoryDisplayName'];
+      var categoryImage = category['categoryImage'];
       categoryImages.push(
         <TouchableOpacity 
-          key={categoryName}
+          key={categoryKey}
           style={styles.touchable}
-          onPress={this.onPressCategory.bind(this, categoryName, category['categoryDisplayName'])}>
+          onPress={this.onPressCategory.bind(this, categoryKey, categoryDisplayName)}>
             <ImageBackground
-              source={category['categoryImage']}
+              source={categoryImage}
               style={styles.image}>
-              <Text style={styles.text}>{category['categoryDisplayName']}</Text>
+              <Text style={styles.text}>{categoryDisplayName}</Text>
             </ImageBackground>
         </TouchableOpacity>
       );
