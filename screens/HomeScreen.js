@@ -1,27 +1,17 @@
 import React from 'react';
 import {
+  Dimensions,
   ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableHighlight,
   TouchableOpacity,
   View,
-  Image,
-  Dimensions,
 } from 'react-native';
-
-import {
-  Card,
-  Icon
-} from 'react-native-elements';
-
 
 import * as firebase from 'firebase';
 
 import { getImage } from '../constants/ImageFilepaths';
-
-const win = Dimensions.get('window');
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -32,7 +22,8 @@ export default class HomeScreen extends React.Component {
     super(props);
 
     this.state = {
-      categories: {}
+      categories: {},
+      categoryDisplayName: null
     };
   }
 
@@ -56,8 +47,8 @@ export default class HomeScreen extends React.Component {
       }.bind(this));
   }
 
-  onPressCategory(categoryKey) {
-    this.props.navigation.navigate('Inventory', { category: categoryKey });
+  onPressCategory(categoryKey, displayName) {
+    this.props.navigation.navigate('Inventory', { category: categoryKey, categoryDisplayName: displayName});
   }
 
   renderCategories() {
@@ -67,14 +58,12 @@ export default class HomeScreen extends React.Component {
         <TouchableOpacity 
           key={categoryName}
           style={styles.touchable}
-          onPress={this.onPressCategory.bind(this, categoryName)}>
+          onPress={this.onPressCategory.bind(this, categoryName, category['categoryDisplayName'])}>
             <ImageBackground
               source={category['categoryImage']}
-              style={styles.image}
-              > 
-              <Text style={styles.text}> {category['categoryDisplayName']}</Text>
+              style={styles.image}>
+              <Text style={styles.text}>{category['categoryDisplayName']}</Text>
             </ImageBackground>
-
         </TouchableOpacity>
       );
     });
@@ -96,6 +85,7 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,

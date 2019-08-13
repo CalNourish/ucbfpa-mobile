@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
   Dimensions
 } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 import * as firebase from 'firebase';
-import { Icon } from 'react-native-elements';
 
 const win = Dimensions.get('window');
 
@@ -25,7 +25,7 @@ export default class InventoryByCategoryScreen extends React.Component {
     this.state = {
       category: this.props.navigation.state.params.category,
       inventory: {},
-      categoryDisplayName: null,
+      categoryDisplayName: this.props.navigation.state.params.categoryDisplayName,
     };
   }
 
@@ -47,17 +47,6 @@ export default class InventoryByCategoryScreen extends React.Component {
           inventory: inventory
         });
       }.bind(this));
-
-    await firebase
-    .database()
-    .ref('category/'+ this.state.category)
-    .once('value')
-    .then(function(data) {
-      var categoryVal = data.val();
-      this.setState({
-        categoryDisplayName: categoryVal['displayName']
-      });
-    }.bind(this));
   }
 
   renderInventory() {
@@ -77,9 +66,7 @@ export default class InventoryByCategoryScreen extends React.Component {
             <Text style={styles.itemName}> {itemName}</Text>
             <Text style={styles.itemCount}> {itemCount} in stock </Text>
           </View>
-         
         </TouchableOpacity>
-        
       );
     });
     return itemRows;
