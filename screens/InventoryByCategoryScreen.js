@@ -1,10 +1,13 @@
 import React from 'react';
 import {
+  Dimensions,
   ScrollView,
   StyleSheet,
   Text,
-  View
+  TouchableOpacity,
+  View,
 } from 'react-native';
+import { Icon } from 'react-native-elements';
 
 import * as firebase from 'firebase';
 
@@ -18,12 +21,14 @@ export default class InventoryByCategoryScreen extends React.Component {
 
     this.state = {
       category: this.props.navigation.state.params.category,
-      inventory: {}
+      categoryDisplayName: this.props.navigation.state.params.categoryDisplayName,
+      inventory: {},
     };
   }
 
   async componentDidMount() {
     var inventory = {};
+
     await firebase
       .database()
       .ref('inventory')
@@ -45,11 +50,21 @@ export default class InventoryByCategoryScreen extends React.Component {
     var itemRows = [];
     Object.entries(this.state.inventory).map(([itemName, itemCount]) => {
       itemRows.push(
-        <Text
-          style={styles.innerText}
-          key={itemName}>
-          {itemName} - Count: {itemCount}
-        </Text>
+        <TouchableOpacity 
+          key={itemName}
+          style={styles.touchable}>
+          <View style={styles.iconHolder}>
+            <Icon
+              name='food-apple-outline'
+              type='material-community'
+              size={30}
+            />
+          </View>
+          <View style={styles.iconHolder}>
+            <Text style={styles.itemName}>{itemName}</Text>
+            <Text style={styles.itemCount}>{itemCount} in stock</Text>
+          </View>
+        </TouchableOpacity>
       );
     });
     return itemRows;
@@ -58,6 +73,9 @@ export default class InventoryByCategoryScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <View>
+          <Text style={styles.categoryName}>{this.state.categoryDisplayName}</Text>
+        </View>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
@@ -70,18 +88,58 @@ export default class InventoryByCategoryScreen extends React.Component {
   }
 }
 
+const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 15,
     backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingTop: 30,
   },
   welcomeContainer: {
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
   },
+  touchable: {
+    flexDirection: "row",
+    height: 80,
+    width: win.width - 20,
+    justifyContent: 'flex-start',
+    borderRadius: 10,
+    backgroundColor: '#F0F0F0',
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+    alignContent: 'center'
+  },
+  itemName: {
+    color: '#000000',
+    fontSize: 14,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    justifyContent: 'flex-start',
+  },
+  itemCount: {
+    color: '#000000',
+    fontSize: 14,
+    textAlign: 'left',
+    marginTop:10,
+    justifyContent: 'flex-start',
+  },
+  iconHolder: {
+    justifyContent: "center",
+    marginLeft: 10,
+    
+  },
+  categoryName: {
+    color: '#000000',
+    fontSize: 22,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginStart: 10,
+    marginTop:30,
+    marginBottom:10,
+    justifyContent: 'flex-start',
+  }
 });

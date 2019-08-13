@@ -1,10 +1,11 @@
 import React from 'react';
 import {
+  Dimensions,
   ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
-  TouchableHighlight,
+  TouchableOpacity,
   View,
 } from 'react-native';
 
@@ -21,7 +22,7 @@ export default class HomeScreen extends React.Component {
     super(props);
 
     this.state = {
-      categories: {}
+      categories: {},
     };
   }
 
@@ -45,23 +46,29 @@ export default class HomeScreen extends React.Component {
       }.bind(this));
   }
 
-  onPressCategory(categoryKey) {
-    this.props.navigation.navigate('Inventory', { category: categoryKey });
+  onPressCategory(categoryKey, displayName) {
+    this.props.navigation.navigate('Inventory', {
+      category: categoryKey,
+      categoryDisplayName: displayName,
+    });
   }
 
   renderCategories() {
     var categoryImages = [];
-    Object.entries(this.state.categories).map(([categoryName, category]) => {
+    Object.entries(this.state.categories).map(([categoryKey, category]) => {
+      var categoryDisplayName = category['categoryDisplayName'];
+      var categoryImage = category['categoryImage'];
       categoryImages.push(
-        <TouchableHighlight
-          onPress={this.onPressCategory.bind(this, categoryName)}
-          key={categoryName}>
-          <ImageBackground
-            source={category['categoryImage']}
-            style={styles.welcomeImage}>
-            <Text style={styles.innerText}>{category['categoryDisplayName']}</Text>
-          </ImageBackground>
-        </TouchableHighlight>
+        <TouchableOpacity 
+          key={categoryKey}
+          style={styles.touchable}
+          onPress={this.onPressCategory.bind(this, categoryKey, categoryDisplayName)}>
+            <ImageBackground
+              source={categoryImage}
+              style={styles.image}>
+              <Text style={styles.text}>{categoryDisplayName}</Text>
+            </ImageBackground>
+        </TouchableOpacity>
       );
     });
     return categoryImages;
@@ -82,6 +89,7 @@ export default class HomeScreen extends React.Component {
   }
 }
 
+const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -101,5 +109,39 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
     marginTop: 3,
     marginLeft: -10,
+  },
+  categoryCard: {
+    width: 400,
+    height: 80,
+    backgroundColor: '#fff',
+  },
+  touchable: {
+    height: 80,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+    backgroundColor: '#febd40',
+    marginLeft: 10,
+    marginRight: 10,
+    marginBottom: 10,
+  },
+  view: {
+    position: 'absolute',
+    backgroundColor: 'transparent'
+  },
+  image: {
+    height: 80,
+    width: win.width - 20,
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  text: {
+    color: '#ffffff',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginStart: 10,
+    justifyContent: 'flex-start',
   },
 });
