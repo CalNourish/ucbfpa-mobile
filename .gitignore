@@ -1,3 +1,5 @@
+.vscode/
+
 node_modules/**/*
 .expo/*
 npm-debug.*
@@ -19,3 +21,5 @@ web-report/
 .watchmanconfig
 
 environment.js
+
+google-services.json
