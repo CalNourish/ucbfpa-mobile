@@ -16,3 +16,11 @@ for environment setup.
 ## Firebase
 
 This project uses Firebase as a backend. To set up Firebase on Expo, [this guide](https://docs.expo.io/versions/latest/guides/using-firebase/) was used.
+
+## Notifications
+
+This project uses the following resources as a guide.
+
+- [Push Notifications](https://docs.expo.io/versions/v34.0.0/guides/push-notifications/)
+- [Using FCM For Push Notifications](https://docs.expo.io/versions/v34.0.0/guides/using-fcm/)
+- [Notification Channels](https://docs.expo.io/versions/latest/guides/notification-channels/)
