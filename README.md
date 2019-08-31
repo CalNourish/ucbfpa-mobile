@@ -24,3 +24,7 @@ This project uses the following resources as a guide.
 - [Push Notifications](https://docs.expo.io/versions/v34.0.0/guides/push-notifications/)
 - [Using FCM For Push Notifications](https://docs.expo.io/versions/v34.0.0/guides/using-fcm/)
 - [Notification Channels](https://docs.expo.io/versions/latest/guides/notification-channels/)
+
+One major caveat: Expo can only accept one FCM server key and one ```google-services.json```. Therefore, the production key is uploaded. Therefore, Android phones will not receive notifications on the dev environment.
+
+iOS phones will work in either environment.
