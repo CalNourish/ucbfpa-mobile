@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Dimensions,
-  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
@@ -9,24 +8,6 @@ import {
   View,
 } from 'react-native';
 import * as firebase from 'firebase';
-import { getImage } from '../constants/ImageFilepaths';
-
-
-import { ExpoLinksView } from '@expo/samples';
-
-// export default function HoursScreen() {
-//   return (
-//     <ScrollView style={styles.container}>
-//       {/**
-//        * Go ahead and delete ExpoLinksView and replace it with your content;
-//        * we just wanted to provide you with some helpful links.
-//        */}
-//       {/* <ExpoLinksView /> */}
-//       <Text>Hours will go here.</Text>
-      
-//     </ScrollView>
-//   );
-// }
 
 export default class HoursScreen extends React.Component {
   static navigationOptions = {
@@ -62,23 +43,20 @@ export default class HoursScreen extends React.Component {
       }.bind(this));
   }
 
-  // onPressCategory(categoryKey, displayName) {
-  //   this.props.navigation.navigate('Inventory', {
-  //     category: categoryKey,
-  //     categoryDisplayName: displayName,
-  //   });
-  // }
-
   renderCategories() {
     var categoryImages = [];
     Object.entries(this.state.days_times).map(([dayKey, day]) => {
       var openingHours = day['openingHours'];
+      var restockDays = day['restock'];
       if (openingHours) {
         categoryImages.push(
         <TouchableOpacity 
           key={dayKey}
           style={styles.touchable}>
             <Text key={dayKey} style={styles.text}>{dayKey}: {openingHours}</Text>
+            <Text key={dayKey + dayKey} style={styles.text}>{restockDays['bread']}</Text> 
+            {/* need to make keys unique */}
+
         </TouchableOpacity>
         );
       };
@@ -105,10 +83,6 @@ export default class HoursScreen extends React.Component {
   }
 }
 
-// HoursScreen.navigationOptions = {
-//   title: 'Hours',
-// };
-
 const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
@@ -120,18 +94,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: 10,
     marginBottom: 20,
-  },
-  welcomeImage: {
-    width: 100,
-    height: 80,
-    resizeMode: 'contain',
-    marginTop: 3,
-    marginLeft: -10,
-  },
-  categoryCard: {
-    width: 400,
-    height: 80,
-    backgroundColor: '#fff',
   },
   touchable: {
     height: 40,
