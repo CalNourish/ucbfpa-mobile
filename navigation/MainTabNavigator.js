@@ -6,7 +6,7 @@ import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import InventoryByCategoryScreen from '../screens/InventoryByCategoryScreen';
 import HoursScreen from '../screens/HoursScreen';
-import SettingsScreen from '../screens/SettingsScreen';
+import NotificationsScreen from '../screens/NotificationsScreen';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -53,26 +53,26 @@ HoursStack.navigationOptions = {
 
 HoursStack.path = '';
 
-const SettingsStack = createStackNavigator(
+const NotificationsStack = createStackNavigator(
   {
-    Settings: SettingsScreen,
+    Notifications: NotificationsScreen,
   },
   config
 );
 
-SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+NotificationsStack.navigationOptions = {
+  tabBarLabel: 'Notifications',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-options' : 'md-options'} />
   ),
 };
 
-SettingsStack.path = '';
+NotificationsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   HoursStack,
-  SettingsStack,
+  NotificationsStack,
 });
 
 tabNavigator.path = '';

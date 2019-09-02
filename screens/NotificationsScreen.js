@@ -8,7 +8,7 @@ import {
 
 import * as firebase from 'firebase';
 
-export default class SettingsScreen extends React.Component {
+export default class NotificationsScreen extends React.Component {
   static navigationOptions = {
     header: null
   };
