@@ -52,6 +52,7 @@ export default class HomeScreen extends React.Component {
       categoryDisplayName: displayName,
     });
   }
+  
 
   renderCategories() {
     var categoryImages = [];
@@ -63,10 +64,11 @@ export default class HomeScreen extends React.Component {
           key={categoryKey}
           style={styles.touchable}
           onPress={this.onPressCategory.bind(this, categoryKey, categoryDisplayName)}>
+            <Text style={styles.text}>{categoryDisplayName}</Text>
+
             <ImageBackground
               source={categoryImage}
               style={styles.image}>
-              <Text style={styles.text}>{categoryDisplayName}</Text>
             </ImageBackground>
         </TouchableOpacity>
       );
@@ -117,6 +119,7 @@ const styles = StyleSheet.create({
   },
   touchable: {
     height: 80,
+    width: win.width - 20,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
@@ -131,12 +134,14 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   image: {
+    flex: 2,
     height: 80,
-    width: win.width - 20,
     justifyContent: 'center',
     borderRadius: 10,
+    backgroundColor: '#a3a3a3'
   },
   text: {
+    flex: 1,
     color: '#ffffff',
     fontSize: 18,
     fontWeight: 'bold',
