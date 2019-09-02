@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Button,
   Dimensions,
   ScrollView,
   StyleSheet,
@@ -12,9 +13,17 @@ import { Icon } from 'react-native-elements';
 import * as firebase from 'firebase';
 
 export default class InventoryByCategoryScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: navigation.getParam('categoryDisplayName'),
+      headerLeft: (
+        <Button
+          title='< Back'
+          onPress={() => navigation.navigate('Home')}
+        />
+      ),
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -73,9 +82,6 @@ export default class InventoryByCategoryScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <View>
-          <Text style={styles.categoryName}>{this.state.categoryDisplayName}</Text>
-        </View>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>

@@ -11,6 +11,7 @@ import firebase from 'firebase';
 import { getImage } from './constants/ImageFilepaths';
 import AppNavigator from './navigation/AppNavigator';
 import { initializeFirebase } from './util/firebase/initFirebase';
+import { registerForPushNotificationsAsync } from './util/notifications/notifications';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -57,6 +58,8 @@ async function loadResourcesAsync() {
       'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
     }),
   ]);
+
+  registerForPushNotificationsAsync();
 }
 
 function handleLoadingError(error) {
