@@ -42,17 +42,25 @@ export default class NotificationsScreen extends React.Component {
 
   renderNotifications() {
     return this.state.notifications.map((notification, index) =>
-      <Text key={index}>{index}. Title: {notification.text}, Text: {notification.title}, Timestamp: {notification.timestamp}</Text>
+    
+      <View key={index} style = {styles.notifContainer}>
+        <Text style = {styles.notifTitle} >{notification.title} </Text>
+        <Text style = {styles.notifText} >{notification.text} </Text>
+        <Text style = {styles.notifTimestamp} >{notification.timestamp} </Text>
+      </View>
+
+      // <Text key={index}>{index}. Title: {notification.text}, Text: {notification.title}, Timestamp: {notification.timestamp}</Text>
     );
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <Text style = {styles.titleText}> Notification History</Text>
         <ScrollView
           style={styles.container}
           contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
+          <View style={styles.contentContainer}>
             {this.renderNotifications()}
           </View>
         </ScrollView>
@@ -67,15 +75,35 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingTop: 30,
+    padding: 10,
   },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
+  notifContainer: {
+    borderTopWidth: 1,
+    borderTopColor: '#febd40',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    padding: 10
   },
   view: {
     position: 'absolute',
     backgroundColor: 'transparent'
   },
+  titleText: {
+    paddingTop: 30,
+    paddingHorizontal: 10,
+    fontSize: 32,
+    fontWeight: 'bold',
+  },
+  notifTitle: {
+    fontSize: 14,
+    fontWeight: 'bold',
+  },
+  notifText: {
+    fontSize: 14,
+  },
+  notifTimestamp: {
+    fontSize: 12,
+    color: '#4d4d4d'
+  },
+
 });
