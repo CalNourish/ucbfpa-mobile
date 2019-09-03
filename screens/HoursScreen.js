@@ -81,8 +81,7 @@ export default class HoursScreen extends React.Component {
     return (
       <View style={styles.contentContainer}>
         <Text style = {styles.titleText}>Hours</Text>
-        <ScrollView
-          style={styles.contentContainer}>
+        <ScrollView style={styles.contentContainer}>
           <View>
             {this.renderHours()}
           </View>
