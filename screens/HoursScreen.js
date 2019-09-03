@@ -39,6 +39,7 @@ export default class HoursScreen extends React.Component {
             daysToHours[readableDay] = {
               day: readableDay,
               hours: day['12hours'],
+              restock: day['restock'],
             };
           }
         });
@@ -46,6 +47,17 @@ export default class HoursScreen extends React.Component {
           daysToHours: daysToHours
         });
       }.bind(this));
+  }
+
+  getEmojis(restock) {
+    let arr = new Array();
+    Object.keys(EMOJIS).map(function(key, emoji){
+      if (restock[key] == 1){
+        arr.push(EMOJIS[key]);
+      }
+    });
+    return arr;
+    // return restock['bread']; //get the emojis for this json
   }
 
   renderHours() {
@@ -57,7 +69,14 @@ export default class HoursScreen extends React.Component {
 
     return orderedDaysToHours.map((dayObject) => {
       if (dayObject) {
-        return <Text key={dayObject.day}>{dayObject.day} | Hours: {dayObject.hours}</Text>;
+        return (
+        <View key={dayObject.day} style = {styles.dayContainer}>
+          <Text style = {styles.dayText} >{dayObject.day} </Text>
+          <View style = {styles.hoursRestockContainer}>
+            <Text style = {styles.hoursText}> {dayObject.hours} </Text>
+            <Text style = {styles.hoursText}> {this.getEmojis(dayObject.restock)} </Text>
+          </View>
+        </View>);
       }
     });
   }
@@ -65,10 +84,10 @@ export default class HoursScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        <Text style = {styles.titleText}>Hours</Text>
         <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
+          style={styles.contentContainer}>
+          <View>
             {this.renderHours()}
           </View>
         </ScrollView>
@@ -77,21 +96,61 @@ export default class HoursScreen extends React.Component {
   }
 }
 
+const EMOJIS = {
+  '-none':'',
+  'bread': '🥖',
+  'eggs': '🥚',
+  'milk': '🥛', 
+  'prepared': '🥡',
+  'produce': '🥦',
+  'shelf': '🥫',
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
   contentContainer: {
+    padding: 30
+  },
+  titleText: {
     paddingTop: 30,
+    paddingLeft: 30,
+    color: '#3d3d3d',
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    justifyContent: 'flex-start',
   },
-  welcomeContainer: {
-    alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
-  },
+
   view: {
     position: 'absolute',
     backgroundColor: 'transparent'
   },
+  dayContainer: {
+    borderTopWidth: 1,
+    borderTopColor: '#d3d3d3',
+    flexDirection: "row",
+    paddingVertical: 10,
+  },
+  hoursRestockContainer: {
+    flex: 3,
+    flexDirection: 'column',
+    justifyContent: 'flex-start'
+  },
+  dayText: {
+    flex: 2,
+    color: '#3d3d3d',
+    fontSize: 18,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    justifyContent: 'flex-start',
+  },
+  hoursText: {
+    flex: 1,
+    color: '#3d3d3d',
+    fontSize: 16,
+    textAlign: 'left',
+    justifyContent: 'flex-start',
+  }
 });
