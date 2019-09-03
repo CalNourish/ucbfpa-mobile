@@ -40,27 +40,38 @@ export default class NotificationsScreen extends React.Component {
       }.bind(this));
   }
 
+  parseTimestamp(timestamp) {
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let ts = new Date('2019-09-02T11:34:00');
+    // let diffInMinutes = (new Date().getTime() - timestamp.getTime())/ (1000 * 60);
+    // let diffInHours = (int)( (new Date().getTime() - timestamp.getTime())
+    //             / (1000 * 60 * 60) );
+    // let diffInDays = (int)( (new Date().getTime() - timestamp.getTime())
+    //             / (1000 * 60 * 60 * 24) );
+    // let diffInWeeks = (int)( (new Date().getTime() - timestamp.getTime())
+    //             / (1000 * 60 * 60 * 24 * 7) );
+    string = months[ts.getMonth()] + ' ' + ts.getDate() + ' at ' + ts.getHours() + ':' + ts.getMinutes();
+    return string;
+  }
+
   renderNotifications() {
     return this.state.notifications.map((notification, index) =>
     
       <View key={index} style = {styles.notifContainer}>
         <Text style = {styles.notifTitle} >{notification.title} </Text>
         <Text style = {styles.notifText} >{notification.text} </Text>
-        <Text style = {styles.notifTimestamp} >{notification.timestamp} </Text>
+        <Text style = {styles.notifTimestamp} >{this.parseTimestamp(notification.timestamp)} </Text>
       </View>
 
-      // <Text key={index}>{index}. Title: {notification.text}, Text: {notification.title}, Timestamp: {notification.timestamp}</Text>
     );
   }
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.contentContainer}>
         <Text style = {styles.titleText}> Notification History</Text>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.contentContainer}>
+        <ScrollView style={styles.contentContainer}>
+          <View>
             {this.renderNotifications()}
           </View>
         </ScrollView>
@@ -89,19 +100,24 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent'
   },
   titleText: {
+    color: '#4d4d4d',
     paddingTop: 30,
-    paddingHorizontal: 10,
     fontSize: 32,
     fontWeight: 'bold',
   },
   notifTitle: {
+    padding: 1,
+    color: '#4d4d4d',
     fontSize: 14,
     fontWeight: 'bold',
   },
   notifText: {
+    padding: 1,
+    color: '#4d4d4d',
     fontSize: 14,
   },
   notifTimestamp: {
+    padding: 1,
     fontSize: 12,
     color: '#4d4d4d'
   },
