@@ -57,16 +57,12 @@ export default class HoursScreen extends React.Component {
       }
     });
     return arr;
-    // return restock['bread']; //get the emojis for this json
   }
 
   renderHours() {
     var orderedDaysToHours = Days.ORDERED_READABLE_DAYS.map((readableDay) => {
       return this.state.daysToHours[readableDay];
     });
-
-    console.log(orderedDaysToHours);
-
     return orderedDaysToHours.map((dayObject) => {
       if (dayObject) {
         return (
@@ -83,7 +79,7 @@ export default class HoursScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.contentContainer}>
         <Text style = {styles.titleText}>Hours</Text>
         <ScrollView
           style={styles.contentContainer}>
@@ -111,12 +107,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contentContainer: {
-    padding: 30
+    padding: 10
   },
   titleText: {
+    color: '#4d4d4d',
     paddingTop: 30,
-    paddingLeft: 30,
-    color: '#3d3d3d',
+    paddingLeft: 10,
     fontSize: 32,
     fontWeight: 'bold',
     textAlign: 'left',
@@ -129,9 +125,9 @@ const styles = StyleSheet.create({
   },
   dayContainer: {
     borderTopWidth: 1,
-    borderTopColor: '#d3d3d3',
+    borderTopColor: '#febd40',
     flexDirection: "row",
-    paddingVertical: 10,
+    padding: 10,
   },
   hoursRestockContainer: {
     flex: 3,
@@ -140,7 +136,7 @@ const styles = StyleSheet.create({
   },
   dayText: {
     flex: 2,
-    color: '#3d3d3d',
+    color: '#4d4d4d',
     fontSize: 18,
     fontWeight: 'bold',
     textAlign: 'left',
@@ -148,9 +144,10 @@ const styles = StyleSheet.create({
   },
   hoursText: {
     flex: 1,
-    color: '#3d3d3d',
+    color: '#4d4d4d',
     fontSize: 16,
     textAlign: 'left',
     justifyContent: 'flex-start',
+    paddingVertical: 2,
   }
 });
