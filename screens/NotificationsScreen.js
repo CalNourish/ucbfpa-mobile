@@ -102,8 +102,11 @@ const styles = StyleSheet.create({
   titleText: {
     color: '#4d4d4d',
     paddingTop: 30,
+    paddingLeft: 10,
     fontSize: 32,
     fontWeight: 'bold',
+    textAlign: 'left',
+    justifyContent: 'flex-start',
   },
   notifTitle: {
     padding: 1,
