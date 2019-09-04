@@ -1,17 +1,14 @@
 import React from 'react';
 import {
   Dimensions,
-  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
-
+import { Icon } from 'react-native-elements';
 import * as firebase from 'firebase';
-
-import { getImage } from '../constants/ImageFilepaths';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -36,7 +33,6 @@ export default class HomeScreen extends React.Component {
         data.forEach(function(childNode) {
           var category = childNode.val();
           categories[childNode.key] = {
-            categoryImage: getImage(category['fileName']),
             categoryDisplayName: category['displayName']
           };
         });
@@ -57,17 +53,19 @@ export default class HomeScreen extends React.Component {
     var categoryImages = [];
     Object.entries(this.state.categories).map(([categoryKey, category]) => {
       var categoryDisplayName = category['categoryDisplayName'];
-      var categoryImage = category['categoryImage'];
       categoryImages.push(
         <TouchableOpacity 
           key={categoryKey}
           style={styles.touchable}
           onPress={this.onPressCategory.bind(this, categoryKey, categoryDisplayName)}>
-            <ImageBackground
-              source={categoryImage}
-              style={styles.image}>
-              <Text style={styles.text}>{categoryDisplayName}</Text>
-            </ImageBackground>
+          <View style={styles.iconHolder}>
+            <Icon
+              name='food-apple-outline'
+              type='material-community'
+              size={30}
+            />
+          </View>
+          <Text style={styles.text}>{categoryDisplayName}</Text>
         </TouchableOpacity>
       );
     });
@@ -76,11 +74,10 @@ export default class HomeScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
+      <View style={styles.contentContainer}>
+        <Text style={styles.titleText}>Live Inventory</Text>
+        <ScrollView style={styles.contentContainer}>
+          <View>
             {this.renderCategories()}
           </View>
         </ScrollView>
@@ -89,14 +86,13 @@ export default class HomeScreen extends React.Component {
   }
 }
 
-const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
   },
   contentContainer: {
-    paddingTop: 30,
+    padding: 10,
   },
   welcomeContainer: {
     alignItems: 'center',
@@ -110,36 +106,42 @@ const styles = StyleSheet.create({
     marginTop: 3,
     marginLeft: -10,
   },
-  categoryCard: {
-    width: 400,
-    height: 80,
-    backgroundColor: '#fff',
+  iconHolder: {
+    justifyContent: "center",    
   },
   touchable: {
-    height: 80,
+    padding: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    borderRadius: 10,
-    backgroundColor: '#febd40',
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
+    justifyContent: 'flex-start',
+    borderTopWidth: 1,
+    borderTopColor: '#febd40',
+    
   },
   view: {
     position: 'absolute',
     backgroundColor: 'transparent'
   },
   image: {
+    flex: 2,
     height: 80,
-    width: win.width - 20,
     justifyContent: 'center',
     borderRadius: 10,
+    backgroundColor: '#fff'
+  },
+  titleText: {
+    color: '#4d4d4d',
+    paddingTop: 30,
+    paddingLeft: 10,
+    fontSize: 32,
+    fontWeight: 'bold',
+    textAlign: 'left',
+    justifyContent: 'flex-start',
   },
   text: {
-    color: '#ffffff',
+    flex: 1,
+    color: '#4d4d4d',
     fontSize: 18,
-    fontWeight: 'bold',
     textAlign: 'left',
     marginStart: 10,
     justifyContent: 'flex-start',

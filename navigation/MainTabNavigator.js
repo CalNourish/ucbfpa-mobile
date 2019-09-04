@@ -5,7 +5,7 @@ import { createStackNavigator, createBottomTabNavigator } from 'react-navigation
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
 import InventoryByCategoryScreen from '../screens/InventoryByCategoryScreen';
-import LinksScreen from '../screens/LinksScreen';
+import HoursScreen from '../screens/HoursScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const config = Platform.select({
@@ -37,21 +37,21 @@ HomeStack.navigationOptions = {
 
 HomeStack.path = '';
 
-const LinksStack = createStackNavigator(
+const HoursStack = createStackNavigator(
   {
-    Links: LinksScreen,
+    Hours: HoursScreen,
   },
   config
 );
 
-LinksStack.navigationOptions = {
-  tabBarLabel: 'Links',
+HoursStack.navigationOptions = {
+  tabBarLabel: 'Hours',
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
   ),
 };
 
-LinksStack.path = '';
+HoursStack.path = '';
 
 const SettingsStack = createStackNavigator(
   {
@@ -71,7 +71,7 @@ SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
-  LinksStack,
+  HoursStack,
   SettingsStack,
 });
 
