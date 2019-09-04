@@ -8,7 +8,6 @@ import { Ionicons } from '@expo/vector-icons';
 
 import firebase from 'firebase';
 
-// import { getImage } from './constants/ImageFilepaths';
 import AppNavigator from './navigation/AppNavigator';
 import { initializeFirebase } from './util/firebase/initFirebase';
 import { registerForPushNotificationsAsync } from './util/notifications/notifications';
@@ -37,19 +36,7 @@ export default function App(props) {
 async function loadResourcesAsync() {
   await initializeFirebase();
 
-  // var imageFileNames = [];
-  // await firebase
-  //   .database()
-  //   .ref('category')
-  //   .once('value')
-  //   .then(function(data) {
-  //     data.forEach(function(childNode) {
-  //       imageFileNames.push(getImage(childNode.val()['fileName']));
-  //     });
-  //   });
-
   await Promise.all([
-    // Asset.loadAsync(imageFileNames),
     Font.loadAsync({
       // This is the font that we are using for our tab bar
       ...Ionicons.font,
