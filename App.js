@@ -2,11 +2,8 @@ import React, { useState } from 'react';
 import { Platform, StatusBar, StyleSheet, View } from 'react-native';
 
 import { AppLoading } from 'expo';
-import { Asset } from 'expo-asset';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
-
-import firebase from 'firebase';
 
 import AppNavigator from './navigation/AppNavigator';
 import { initializeFirebase } from './util/firebase/initFirebase';

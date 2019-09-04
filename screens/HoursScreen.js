@@ -65,10 +65,10 @@ export default class HoursScreen extends React.Component {
       if (dayObject) {
         return (
         <View key={dayObject.day} style={styles.dayContainer}>
-          <Text style={styles.dayText} >{dayObject.day} </Text>
+          <Text style={styles.dayText}>{dayObject.day}</Text>
           <View style={styles.hoursRestockContainer}>
-            <Text style={styles.hoursText}> {dayObject.hours} </Text>
-            <Text style={styles.hoursText}> {this.getEmojis(dayObject.restock)} </Text>
+            <Text style={styles.hoursText}>{dayObject.hours}</Text>
+            <Text style={styles.hoursText}>{this.getEmojis(dayObject.restock)}</Text>
           </View>
         </View>);
       }

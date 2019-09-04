@@ -1,7 +1,6 @@
 import React from 'react';
 import {
   Dimensions,
-  ImageBackground,
   ScrollView,
   StyleSheet,
   Text,
@@ -49,7 +48,6 @@ export default class HomeScreen extends React.Component {
       categoryDisplayName: displayName,
     });
   }
-  
 
   renderCategories() {
     var categoryImages = [];
@@ -88,7 +86,6 @@ export default class HomeScreen extends React.Component {
   }
 }
 
-const win = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     flex: 1,
