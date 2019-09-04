@@ -8,13 +8,8 @@ import {
   TouchableOpacity,
   View,
 } from 'react-native';
-
-import * as firebase from 'firebase';
-
-import { getImage } from '../constants/ImageFilepaths';
-
 import { Icon } from 'react-native-elements';
-
+import * as firebase from 'firebase';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -39,7 +34,6 @@ export default class HomeScreen extends React.Component {
         data.forEach(function(childNode) {
           var category = childNode.val();
           categories[childNode.key] = {
-            categoryImage: getImage(category['fileName']),
             categoryDisplayName: category['displayName']
           };
         });
@@ -61,7 +55,6 @@ export default class HomeScreen extends React.Component {
     var categoryImages = [];
     Object.entries(this.state.categories).map(([categoryKey, category]) => {
       var categoryDisplayName = category['categoryDisplayName'];
-      var categoryImage = category['categoryImage'];
       categoryImages.push(
         <TouchableOpacity 
           key={categoryKey}
@@ -75,11 +68,6 @@ export default class HomeScreen extends React.Component {
             />
           </View>
           <Text style={styles.text}>{categoryDisplayName}</Text>
-
-            {/* <ImageBackground
-              // source={categoryImage}
-              style={styles.image}>
-            </ImageBackground> */}
         </TouchableOpacity>
       );
     });
@@ -89,8 +77,8 @@ export default class HomeScreen extends React.Component {
   render() {
     return (
       <View style={styles.contentContainer}>
-        <Text style = {styles.titleText}>Live Inventory</Text>
-        <ScrollView style = {styles.contentContainer}>
+        <Text style={styles.titleText}>Live Inventory</Text>
+        <ScrollView style={styles.contentContainer}>
           <View>
             {this.renderCategories()}
           </View>

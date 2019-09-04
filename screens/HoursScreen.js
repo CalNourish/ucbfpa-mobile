@@ -5,10 +5,9 @@ import {
   Text,
   View,
 } from 'react-native';
-
 import * as firebase from 'firebase';
-
 import Days from '../constants/Days';
+import Icons from '../constants/Icons';
 
 export default class HoursScreen extends React.Component {
   static navigationOptions = {
@@ -50,13 +49,12 @@ export default class HoursScreen extends React.Component {
   }
 
   getEmojis(restock) {
-    let arr = new Array();
-    Object.keys(EMOJIS).map(function(key, emoji){
-      if (restock[key] == 1){
-        arr.push(EMOJIS[key]);
+    const emojis = Icons.EMOJIS;
+    return Object.keys(emojis).map(function(key) {
+      if (restock[key] == 1) {
+        return emojis[key];
       }
     });
-    return arr;
   }
 
   renderHours() {
@@ -66,11 +64,11 @@ export default class HoursScreen extends React.Component {
     return orderedDaysToHours.map((dayObject) => {
       if (dayObject) {
         return (
-        <View key={dayObject.day} style = {styles.dayContainer}>
-          <Text style = {styles.dayText} >{dayObject.day} </Text>
-          <View style = {styles.hoursRestockContainer}>
-            <Text style = {styles.hoursText}> {dayObject.hours} </Text>
-            <Text style = {styles.hoursText}> {this.getEmojis(dayObject.restock)} </Text>
+        <View key={dayObject.day} style={styles.dayContainer}>
+          <Text style={styles.dayText} >{dayObject.day} </Text>
+          <View style={styles.hoursRestockContainer}>
+            <Text style={styles.hoursText}> {dayObject.hours} </Text>
+            <Text style={styles.hoursText}> {this.getEmojis(dayObject.restock)} </Text>
           </View>
         </View>);
       }
@@ -80,7 +78,7 @@ export default class HoursScreen extends React.Component {
   render() {
     return (
       <View style={styles.contentContainer}>
-        <Text style = {styles.titleText}>Hours</Text>
+        <Text style={styles.titleText}>Hours</Text>
         <ScrollView style={styles.contentContainer}>
           <View>
             {this.renderHours()}
@@ -91,15 +89,7 @@ export default class HoursScreen extends React.Component {
   }
 }
 
-const EMOJIS = {
-  '-none':'',
-  'bread': '🥖',
-  'eggs': '🥚',
-  'milk': '🥛', 
-  'prepared': '🥡',
-  'produce': '🥦',
-  'shelf': '🥫',
-}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
