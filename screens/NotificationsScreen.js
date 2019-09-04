@@ -56,20 +56,18 @@ export default class NotificationsScreen extends React.Component {
 
   renderNotifications() {
     return this.state.notifications.map((notification, index) =>
-    
-      <View key={index} style = {styles.notifContainer}>
-        <Text style = {styles.notifTitle} >{notification.title} </Text>
-        <Text style = {styles.notifText} >{notification.text} </Text>
-        <Text style = {styles.notifTimestamp} >{this.parseTimestamp(notification.timestamp)} </Text>
+      <View key={index} style={styles.notifContainer}>
+        <Text style={styles.notifTitle}>{notification.title}</Text>
+        <Text style={styles.notifText}>{notification.text}</Text>
+        <Text style={styles.notifTimestamp}>{this.parseTimestamp(notification.timestamp)}</Text>
       </View>
-
     );
   }
 
   render() {
     return (
       <View style={styles.contentContainer}>
-        <Text style = {styles.titleText}> Notification History</Text>
+        <Text style={styles.titleText}>Notification History</Text>
         <ScrollView style={styles.contentContainer}>
           <View>
             {this.renderNotifications()}
@@ -124,5 +122,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#4d4d4d'
   },
-
 });
