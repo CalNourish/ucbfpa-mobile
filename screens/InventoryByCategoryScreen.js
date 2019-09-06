@@ -113,8 +113,6 @@ const styles = StyleSheet.create({
     height: 80,
     width: win.width - 20,
     justifyContent: 'flex-start',
-    // borderRadius: 10,
-    // backgroundColor: '#F0F0F0',
     borderBottomWidth: 1,
     borderBottomColor: Colors.accentColor,
     alignContent: 'center'
