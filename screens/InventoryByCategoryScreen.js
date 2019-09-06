@@ -9,8 +9,9 @@ import {
   View,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
-
 import * as firebase from 'firebase';
+import Icons from '../constants/Icons';
+import Colors from '../constants/Colors';
 
 export default class InventoryByCategoryScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -64,9 +65,10 @@ export default class InventoryByCategoryScreen extends React.Component {
           style={styles.touchable}>
           <View style={styles.iconHolder}>
             <Icon
-              name='food-apple-outline'
+              name={Icons.CATEGORY_ICONS[this.state.categoryDisplayName]}
               type='material-community'
               size={30}
+              color={Colors.primaryTextColor}
             />
           </View>
           <View style={styles.iconHolder}>
@@ -112,22 +114,21 @@ const styles = StyleSheet.create({
     height: 80,
     width: win.width - 20,
     justifyContent: 'flex-start',
-    borderRadius: 10,
-    backgroundColor: '#F0F0F0',
     marginLeft: 10,
     marginRight: 10,
-    marginBottom: 10,
+    borderTopWidth: 1,
+    borderTopColor: Colors.accentColor,   
     alignContent: 'center'
   },
   itemName: {
-    color: '#000000',
+    color: Colors.primaryTextColor,
     fontSize: 14,
     fontWeight: 'bold',
     textAlign: 'left',
     justifyContent: 'flex-start',
   },
   itemCount: {
-    color: '#000000',
+    color: Colors.primaryTextColor,
     fontSize: 14,
     textAlign: 'left',
     marginTop:10,
@@ -139,7 +140,7 @@ const styles = StyleSheet.create({
     
   },
   categoryName: {
-    color: '#000000',
+    color: Colors.primaryTextColor,
     fontSize: 22,
     fontWeight: 'bold',
     textAlign: 'left',
