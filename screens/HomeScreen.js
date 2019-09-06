@@ -9,6 +9,8 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import * as firebase from 'firebase';
+import Icons from '../constants/Icons';
+
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -60,7 +62,7 @@ export default class HomeScreen extends React.Component {
           onPress={this.onPressCategory.bind(this, categoryKey, categoryDisplayName)}>
           <View style={styles.iconHolder}>
             <Icon
-              name='food-apple-outline'
+              name= {Icons.CATEGORY_ICONS[categoryDisplayName]}
               type='material-community'
               size={30}
             />

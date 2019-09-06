@@ -9,8 +9,9 @@ import {
   View,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
-
 import * as firebase from 'firebase';
+import Icons from '../constants/Icons';
+
 
 export default class InventoryByCategoryScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -64,7 +65,7 @@ export default class InventoryByCategoryScreen extends React.Component {
           style={styles.touchable}>
           <View style={styles.iconHolder}>
             <Icon
-              name='food-apple-outline'
+              name={Icons.CATEGORY_ICONS[this.state.categoryDisplayName]}
               type='material-community'
               size={30}
             />
