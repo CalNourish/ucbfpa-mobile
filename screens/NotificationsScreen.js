@@ -5,8 +5,8 @@ import {
   Text,
   View,
 } from 'react-native';
+
 import * as firebase from 'firebase';
-import { parseTimestamp } from '../constants/Timestamp';
 
 export default class NotificationsScreen extends React.Component {
   static navigationOptions = {
@@ -40,12 +40,27 @@ export default class NotificationsScreen extends React.Component {
       }.bind(this));
   }
 
+  parseTimestamp(timestamp) {
+    let month = timestamp.slice(5,7);
+    let date = timestamp.slice(8,10);
+    let hour = timestamp.slice(11,13);
+    let minute = timestamp.slice(14,16);
+    let ampm;
+    if (hour < 12) {
+      ampm = 'AM';
+    } else {
+      ampm = 'PM';
+    }
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];    
+    return months[month - 1] + ' ' + date/1 + ' at ' + hour%12 + ':' + minute + ' ' + ampm; 
+  }
+
   renderNotifications() {
     return this.state.notifications.map((notification, index) =>
       <View key={index} style={styles.notifContainer}>
         <Text style={styles.notifTitle}>{notification.title}</Text>
         <Text style={styles.notifText}>{notification.text}</Text>
-        <Text style={styles.notifTimestamp}>{parseTimestamp(notification.timestamp)}</Text>
+        <Text style={styles.notifTimestamp}>{this.parseTimestamp(notification.timestamp)}</Text>
       </View>
     );
   }
