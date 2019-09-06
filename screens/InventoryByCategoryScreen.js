@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import * as firebase from 'firebase';
+import Colors from '../constants/Colors';
 import Icons from '../constants/Icons';
 
 
@@ -68,6 +69,7 @@ export default class InventoryByCategoryScreen extends React.Component {
               name={Icons.CATEGORY_ICONS[this.state.categoryDisplayName]}
               type='material-community'
               size={30}
+              color={Colors.accentColor}
             />
           </View>
           <View style={styles.iconHolder}>
@@ -84,9 +86,8 @@ export default class InventoryByCategoryScreen extends React.Component {
     return (
       <View style={styles.container}>
         <ScrollView
-          style={styles.container}
-          contentContainerStyle={styles.contentContainer}>
-          <View style={styles.welcomeContainer}>
+          style={styles.contentContainer}>
+          <View style={styles.container}>
             {this.renderInventory()}
           </View>
         </ScrollView>
@@ -102,22 +103,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   contentContainer: {
+    padding: 10
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
-    marginBottom: 20,
   },
   touchable: {
     flexDirection: "row",
     height: 80,
     width: win.width - 20,
     justifyContent: 'flex-start',
-    borderRadius: 10,
-    backgroundColor: '#F0F0F0',
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
+    // borderRadius: 10,
+    // backgroundColor: '#F0F0F0',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.accentColor,
     alignContent: 'center'
   },
   itemName: {
@@ -137,7 +136,6 @@ const styles = StyleSheet.create({
   iconHolder: {
     justifyContent: "center",
     marginLeft: 10,
-    
   },
   categoryName: {
     color: '#000000',

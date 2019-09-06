@@ -10,6 +10,7 @@ import {
 import { Icon } from 'react-native-elements';
 import * as firebase from 'firebase';
 import Icons from '../constants/Icons';
+import Colors from '../constants/Colors';
 
 
 export default class HomeScreen extends React.Component {
@@ -62,9 +63,10 @@ export default class HomeScreen extends React.Component {
           onPress={this.onPressCategory.bind(this, categoryKey, categoryDisplayName)}>
           <View style={styles.iconHolder}>
             <Icon
-              name= {Icons.CATEGORY_ICONS[categoryDisplayName]}
+              name={Icons.CATEGORY_ICONS[categoryDisplayName]}
               type='material-community'
               size={30}
+              color={Colors.primaryTextColor}
             />
           </View>
           <Text style={styles.text}>{categoryDisplayName}</Text>
