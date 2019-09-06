@@ -69,7 +69,7 @@ export default class InventoryByCategoryScreen extends React.Component {
               name={Icons.CATEGORY_ICONS[this.state.categoryDisplayName]}
               type='material-community'
               size={30}
-              color={Colors.accentColor}
+              color={Colors.primaryTextColor}
             />
           </View>
           <View style={styles.iconHolder}>
