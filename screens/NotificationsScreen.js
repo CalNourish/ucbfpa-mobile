@@ -7,6 +7,10 @@ import {
 } from 'react-native';
 
 import * as firebase from 'firebase';
+<<<<<<< HEAD
+=======
+import { parseTimestamp } from '../constants/Timestamp';
+>>>>>>> ebb9eff4efa513a550e3035a311d3ac4e1a73766
 
 export default class NotificationsScreen extends React.Component {
   static navigationOptions = {
@@ -40,6 +44,7 @@ export default class NotificationsScreen extends React.Component {
       }.bind(this));
   }
 
+<<<<<<< HEAD
   parseTimestamp(timestamp) {
     let month = timestamp.slice(5,7);
     let date = timestamp.slice(8,10);
@@ -55,12 +60,18 @@ export default class NotificationsScreen extends React.Component {
     return months[month - 1] + ' ' + date/1 + ' at ' + hour%12 + ':' + minute + ' ' + ampm; 
   }
 
+=======
+>>>>>>> ebb9eff4efa513a550e3035a311d3ac4e1a73766
   renderNotifications() {
     return this.state.notifications.map((notification, index) =>
       <View key={index} style={styles.notifContainer}>
         <Text style={styles.notifTitle}>{notification.title}</Text>
         <Text style={styles.notifText}>{notification.text}</Text>
+<<<<<<< HEAD
         <Text style={styles.notifTimestamp}>{this.parseTimestamp(notification.timestamp)}</Text>
+=======
+        <Text style={styles.notifTimestamp}>{parseTimestamp(notification.timestamp)}</Text>
+>>>>>>> ebb9eff4efa513a550e3035a311d3ac4e1a73766
       </View>
     );
   }
