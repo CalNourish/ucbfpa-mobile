@@ -9,6 +9,7 @@ import {
   View,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { RFValue } from "react-native-responsive-fontsize";
 import * as firebase from 'firebase';
 import Icons from '../constants/Icons';
 import Colors from '../constants/Colors';
@@ -122,14 +123,14 @@ const styles = StyleSheet.create({
   },
   itemName: {
     color: Colors.primaryTextColor,
-    fontSize: 14,
+    fontSize: RFValue(14),
     fontWeight: 'bold',
     textAlign: 'left',
     justifyContent: 'flex-start',
   },
   itemCount: {
     color: Colors.primaryTextColor,
-    fontSize: 14,
+    fontSize: RFValue(14),
     textAlign: 'left',
     marginTop:10,
     justifyContent: 'flex-start',
@@ -141,7 +142,7 @@ const styles = StyleSheet.create({
   },
   categoryName: {
     color: Colors.primaryTextColor,
-    fontSize: 22,
+    fontSize: RFValue(22),
     fontWeight: 'bold',
     textAlign: 'left',
     marginStart: 10,
