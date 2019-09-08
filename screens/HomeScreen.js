@@ -65,7 +65,7 @@ export default class HomeScreen extends React.Component {
             <Icon
               name={Icons.CATEGORY_ICONS[categoryDisplayName]}
               type='material-community'
-              size={30}
+              size={RFValue(30)}
               color={Colors.primaryTextColor}
             />
           </View>

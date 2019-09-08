@@ -19,10 +19,16 @@ export default class InventoryByCategoryScreen extends React.Component {
     return {
       headerTitle: navigation.getParam('categoryDisplayName'),
       headerLeft: (
-        <Button
-          title='< Back'
-          onPress={() => navigation.navigate('Home')}
-        />
+        <View style={styles.iconHolder}>
+          <Icon
+            name={Icons.NAVIGATION_ICONS['back']}
+            type='material-community'
+            size={RFValue(30)}
+            color={Colors.primaryTextColor}
+            style={styles.topNavButton}
+            onPress={() => navigation.navigate('Home')}
+          />
+        </View>
       ),
     };
   }
@@ -68,7 +74,7 @@ export default class InventoryByCategoryScreen extends React.Component {
             <Icon
               name={Icons.CATEGORY_ICONS[this.state.categoryDisplayName]}
               type='material-community'
-              size={30}
+              size={RFValue(30)}
               color={Colors.primaryTextColor}
             />
           </View>
