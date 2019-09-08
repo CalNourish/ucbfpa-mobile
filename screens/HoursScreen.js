@@ -5,6 +5,7 @@ import {
   Text,
   View,
 } from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
 import * as firebase from 'firebase';
 import Days from '../constants/Days';
 import Icons from '../constants/Icons';
@@ -102,7 +103,7 @@ const styles = StyleSheet.create({
     color: '#4d4d4d',
     paddingTop: 30,
     paddingLeft: 10,
-    fontSize: 32,
+    fontSize: RFValue(32),
     fontWeight: 'bold',
     textAlign: 'left',
     justifyContent: 'flex-start',
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
   dayText: {
     flex: 2,
     color: '#4d4d4d',
-    fontSize: 18,
+    fontSize: RFValue(18),
     fontWeight: 'bold',
     textAlign: 'left',
     justifyContent: 'flex-start',
@@ -134,7 +135,7 @@ const styles = StyleSheet.create({
   hoursText: {
     flex: 1,
     color: '#4d4d4d',
-    fontSize: 16,
+    fontSize: RFValue(16),
     textAlign: 'left',
     justifyContent: 'flex-start',
     paddingVertical: 2,

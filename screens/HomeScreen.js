@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import { Icon } from 'react-native-elements';
+import { RFValue } from "react-native-responsive-fontsize";
 import * as firebase from 'firebase';
 import Icons from '../constants/Icons'
 import Colors from '../constants/Colors';
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     color: '#4d4d4d',
     paddingTop: 30,
     paddingLeft: 10,
-    fontSize: 32,
+    fontSize: RFValue(32),
     fontWeight: 'bold',
     textAlign: 'left',
     justifyContent: 'flex-start',
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     color: '#4d4d4d',
-    fontSize: 18,
+    fontSize: RFValue(18),
     textAlign: 'left',
     marginStart: 10,
     justifyContent: 'flex-start',

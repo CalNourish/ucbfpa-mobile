@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 
 import * as firebase from 'firebase';
+import { RFValue } from "react-native-responsive-fontsize";
 import { parseTimestamp } from '../constants/Timestamp';
 
 export default class NotificationsScreen extends React.Component {
@@ -88,7 +89,7 @@ const styles = StyleSheet.create({
     color: '#4d4d4d',
     paddingTop: 30,
     paddingLeft: 10,
-    fontSize: 32,
+    fontSize: RFValue(32),
     fontWeight: 'bold',
     textAlign: 'left',
     justifyContent: 'flex-start',
@@ -96,17 +97,17 @@ const styles = StyleSheet.create({
   notifTitle: {
     padding: 1,
     color: '#4d4d4d',
-    fontSize: 14,
+    fontSize: RFValue(14),
     fontWeight: 'bold',
   },
   notifText: {
     padding: 1,
     color: '#4d4d4d',
-    fontSize: 14,
+    fontSize: RFValue(14),
   },
   notifTimestamp: {
     padding: 1,
-    fontSize: 12,
+    fontSize: RFValue(12),
     color: '#5d5d5d'
   },
 });
