@@ -64,7 +64,9 @@ export default class InventoryByCategoryScreen extends React.Component {
   }
 
   renderStockCount(count) {
-    if (count < 10) {
+    if (count == 0) {
+      return (<Text style={styles.itemCountOut}>Not in stock</Text>);
+    } else if (count < 10) {
       return (<Text style={styles.itemCountLow}>{count} in stock</Text>);
     } else if (count < 20) {
       return (<Text style={styles.itemCountMedium}>{count} in stock</Text>);
@@ -73,13 +75,31 @@ export default class InventoryByCategoryScreen extends React.Component {
     }
   }
 
-  renderInventory() {
-    var itemRows = [];
-    Object.entries(this.state.inventory).map(([itemName, itemCount]) => {
-      itemRows.push(
+  renderItem(itemName, itemCount) {
+    if (itemCount == 0) {
+      return (
         <TouchableOpacity 
           key={itemName}
-          style={styles.touchable}>
+          style={styles.outOfStock}>
+          <View style={styles.iconHolder}>
+            <Icon
+              name={Icons.CATEGORY_ICONS[this.state.categoryDisplayName]}
+              type='material-community'
+              size={RFValue(30)}
+              color={Colors.itemOutOfStock}
+            />
+          </View>
+          <View style={styles.iconHolder}>
+            <Text style={styles.itemNameOutOfStock}>{itemName}</Text>
+            {this.renderStockCount(itemCount)}
+          </View>
+        </TouchableOpacity>
+      )
+    } else {
+      return (
+        <TouchableOpacity 
+          key={itemName}
+          style={styles.inStock}>
           <View style={styles.iconHolder}>
             <Icon
               name={Icons.CATEGORY_ICONS[this.state.categoryDisplayName]}
@@ -89,10 +109,19 @@ export default class InventoryByCategoryScreen extends React.Component {
             />
           </View>
           <View style={styles.iconHolder}>
-            <Text style={styles.itemName}>{itemName}</Text>
+            <Text style={styles.itemNameInStock}>{itemName}</Text>
             {this.renderStockCount(itemCount)}
           </View>
         </TouchableOpacity>
+      )
+    }
+  }
+
+  renderInventory() {
+    var itemRows = [];
+    Object.entries(this.state.inventory).map(([itemName, itemCount]) => {
+      itemRows.push(
+        this.renderItem(itemName, itemCount)
       );
     });
     return itemRows;
@@ -125,26 +154,42 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 20,
   },
-  touchable: {
+  inStock: {
     flexDirection: "row",
     height: 80,
     width: win.width - 20,
     justifyContent: 'flex-start',
-    marginLeft: 10,
-    marginRight: 10,
-    borderTopWidth: 1,
-    borderTopColor: Colors.accentColor,   
+    marginHorizontal: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.accentColor,   
     alignContent: 'center'
   },
-  itemName: {
+  outOfStock: {
+    flexDirection: "row",
+    height: 80,
+    width: win.width - 20,
+    justifyContent: 'flex-start',
+    marginHorizontal: 10,
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.accentColor,   
+    alignContent: 'center'
+  },
+  itemNameInStock: {
     color: Colors.primaryTextColor,
     fontSize: RFValue(14),
     fontWeight: 'bold',
     textAlign: 'left',
     justifyContent: 'flex-start',
   },
+  itemNameOutOfStock: {
+    color: Colors.itemOutOfStock,
+    fontSize: RFValue(14),
+    fontWeight: 'bold',
+    textAlign: 'left',
+    justifyContent: 'flex-start',
+  },
   itemCountHigh: {
-    color: '#228c22',
+    color: Colors.itemCountHigh,
     fontSize: RFValue(14),
     fontWeight: 'bold',
     textAlign: 'left',
@@ -152,7 +197,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   itemCountMedium: {
-    color: '#febd40',
+    color: Colors.itemCountMedium,
     fontSize: RFValue(14),
     fontWeight: 'bold',
     textAlign: 'left',
@@ -160,7 +205,15 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
   itemCountLow: {
-    color: '#c21807',
+    color: Colors.itemCountLow,
+    fontSize: RFValue(14),
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginTop: 10,
+    justifyContent: 'flex-start',
+  },
+  itemCountOut: {
+    color: Colors.itemOutOfStock,
     fontSize: RFValue(14),
     fontWeight: 'bold',
     textAlign: 'left',
@@ -170,7 +223,6 @@ const styles = StyleSheet.create({
   iconHolder: {
     justifyContent: "center",
     marginLeft: 10,
-    
   },
   categoryName: {
     color: Colors.primaryTextColor,
