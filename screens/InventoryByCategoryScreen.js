@@ -63,6 +63,16 @@ export default class InventoryByCategoryScreen extends React.Component {
       }.bind(this));
   }
 
+  renderStockCount(count) {
+    if (count < 10) {
+      return (<Text style={styles.itemCountLow}>{count} in stock</Text>);
+    } else if (count < 20) {
+      return (<Text style={styles.itemCountMedium}>{count} in stock</Text>);
+    } else {
+      return (<Text style={styles.itemCountHigh}>{count} in stock</Text>);
+    }
+  }
+
   renderInventory() {
     var itemRows = [];
     Object.entries(this.state.inventory).map(([itemName, itemCount]) => {
@@ -80,7 +90,7 @@ export default class InventoryByCategoryScreen extends React.Component {
           </View>
           <View style={styles.iconHolder}>
             <Text style={styles.itemName}>{itemName}</Text>
-            <Text style={styles.itemCount}>{itemCount} in stock</Text>
+            {this.renderStockCount(itemCount)}
           </View>
         </TouchableOpacity>
       );
@@ -113,7 +123,6 @@ const styles = StyleSheet.create({
   },
   welcomeContainer: {
     alignItems: 'center',
-    marginTop: 10,
     marginBottom: 20,
   },
   touchable: {
@@ -134,11 +143,28 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     justifyContent: 'flex-start',
   },
-  itemCount: {
-    color: Colors.primaryTextColor,
+  itemCountHigh: {
+    color: '#228c22',
     fontSize: RFValue(14),
+    fontWeight: 'bold',
     textAlign: 'left',
-    marginTop:10,
+    marginTop: 10,
+    justifyContent: 'flex-start',
+  },
+  itemCountMedium: {
+    color: '#febd40',
+    fontSize: RFValue(14),
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginTop: 10,
+    justifyContent: 'flex-start',
+  },
+  itemCountLow: {
+    color: '#c21807',
+    fontSize: RFValue(14),
+    fontWeight: 'bold',
+    textAlign: 'left',
+    marginTop: 10,
     justifyContent: 'flex-start',
   },
   iconHolder: {
@@ -152,8 +178,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     textAlign: 'left',
     marginStart: 10,
-    marginTop:30,
-    marginBottom:10,
+    marginTop: 30,
+    marginBottom: 10,
     justifyContent: 'flex-start',
   }
 });
