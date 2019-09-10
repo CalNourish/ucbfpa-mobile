@@ -7,10 +7,7 @@ export function parseTimestamp(timestamp) {
     let hour = timestamp.slice(11,13);
     let minute = timestamp.slice(14,16);
     let ampm;
-    if (hour < 12) {
-      ampm = 'AM';
-    } else {
-      ampm = 'PM';
-    }
-    return months[month - 1] + ' ' + date/1 + ' at ' + hour%12 + ':' + minute + ' ' + ampm; 
+    (hour < 12) ? ampm = 'AM' : ampm = 'PM';
+    (hour == 0 || hour == 12) ? hour = 12 : hour = hour%12;
+    return months[month - 1] + ' ' + date/1 + ' at ' + hour + ':' + minute + ' ' + ampm; 
   }
