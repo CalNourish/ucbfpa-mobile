@@ -23,7 +23,7 @@ const HomeStack = createStackNavigator(
 
 HomeStack.navigationOptions = {
   tabBarLabel: ({ focused }) => (
-    <Text style={{marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Inventory</Text>),
+    <Text style={{alignSelf:'center', marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Inventory</Text>),
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? `ios-list` : 'md-list'}/>
   ),
@@ -40,7 +40,7 @@ const HoursStack = createStackNavigator(
 
 HoursStack.navigationOptions = {
   tabBarLabel: ({ focused }) => (
-    <Text style={{marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Hours</Text>),  
+    <Text style={{alignSelf:'center', marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Hours</Text>),  
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-time' : 'md-time'} />
   ),
@@ -57,7 +57,7 @@ const NotificationsStack = createStackNavigator(
 
 NotificationsStack.navigationOptions = {
   tabBarLabel: ({ focused }) => (
-    <Text style={{marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Notifications</Text>),  
+    <Text style={{alignSelf:'center', marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Notifications</Text>),  
   tabBarIcon: ({ focused }) => (
     <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-notifications' : 'md-notifications'} />
   ),
