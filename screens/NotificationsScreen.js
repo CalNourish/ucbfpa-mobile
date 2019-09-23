@@ -5,15 +5,32 @@ import {
   Text,
   View,
 } from 'react-native';
+import { Icon } from 'react-native-elements';
+import { RFValue } from "react-native-responsive-fontsize";
 
 import * as firebase from 'firebase';
-import { RFValue } from "react-native-responsive-fontsize";
+
+import Colors from '../constants/Colors';
+import Icons from '../constants/Icons';
 import { parseTimestamp } from '../constants/Timestamp';
 
 export default class NotificationsScreen extends React.Component {
-  static navigationOptions = {
-    header: null
-  };
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerTitle: 'Notification History',
+      headerLeft: (
+        <View style={styles.iconHolder}>
+          <Icon
+            name={Icons.NAVIGATION_ICONS['back']}
+            type='material-community'
+            size={RFValue(30)}
+            color={Colors.primaryTextColor}
+            onPress={() => navigation.navigate('Settings')}
+          />
+        </View>
+      ),
+    };
+  }
 
   constructor(props) {
     super(props);
@@ -55,7 +72,6 @@ export default class NotificationsScreen extends React.Component {
   render() {
     return (
       <View style={styles.contentContainer}>
-        <Text style={styles.titleText}>Notification History</Text>
         <ScrollView style={styles.contentContainer}>
           <View>
             {this.renderNotifications()}
@@ -85,15 +101,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'transparent'
   },
-  titleText: {
-    color: '#4d4d4d',
-    paddingTop: 30,
-    paddingLeft: 10,
-    fontSize: RFValue(32),
-    fontWeight: 'bold',
-    textAlign: 'left',
-    justifyContent: 'flex-start',
-  },
   notifTitle: {
     padding: 1,
     color: '#4d4d4d',
@@ -109,5 +116,9 @@ const styles = StyleSheet.create({
     padding: 1,
     fontSize: RFValue(12),
     color: '#5d5d5d'
+  },
+  iconHolder: {
+    justifyContent: "center",
+    marginLeft: 10,
   },
 });

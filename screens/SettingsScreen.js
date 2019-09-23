@@ -1,6 +1,12 @@
 import React from 'react';
-
-import { ExpoConfigView } from '@expo/samples';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
+import { RFValue } from "react-native-responsive-fontsize";
+import SettingsList from 'react-native-settings-list';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -11,7 +17,41 @@ export default class SettingsScreen extends React.Component {
     super(props);
   }
 
+
   render() {
-    return <ExpoConfigView />;
+    return (
+      <View style={styles.contentContainer}>
+        <Text style={styles.titleText}>Settings</Text>
+        <ScrollView style={styles.contentContainer}>
+          <SettingsList>
+            <SettingsList.Item
+              itemWidth={RFValue(50)}
+              title='Notifications'
+              onPress={() => this.props.navigation.navigate('Notifications')}
+            />
+            <SettingsList.Item
+              itemWidth={RFValue(50)}
+              title='Privacy Policy'
+              onPress={() => console.log("Hello")}
+            />
+          </SettingsList>
+        </ScrollView>
+      </View>
+    );
   }
 }
+
+const styles = StyleSheet.create({
+  contentContainer: {
+    padding: 10,
+  },
+  titleText: {
+    color: '#4d4d4d',
+    paddingTop: 30,
+    paddingLeft: 10,
+    fontSize: RFValue(32),
+    fontWeight: 'bold',
+    textAlign: 'left',
+    justifyContent: 'flex-start',
+  },
+});
