@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { RFValue } from "react-native-responsive-fontsize";
 import SettingsList from 'react-native-settings-list';
+import Colors from '../constants/Colors';
 
 export default class SettingsScreen extends React.Component {
   static navigationOptions = {
@@ -21,9 +22,9 @@ export default class SettingsScreen extends React.Component {
   render() {
     return (
       <View style={styles.contentContainer}>
-        <Text style={styles.titleText}>Settings</Text>
+        <Text style={styles.titleText}>Menu</Text>
         <ScrollView style={styles.contentContainer}>
-          <SettingsList>
+          <SettingsList borderColor={Colors.accentColor}>
             <SettingsList.Item
               itemWidth={RFValue(50)}
               title='Notifications'

@@ -29,7 +29,7 @@ HomeStack.navigationOptions = {
   tabBarLabel: ({ focused }) => (
     <Text style={{alignSelf:'center', marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Inventory</Text>),
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? `ios-list` : 'md-list'}/>
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? `ios-checkbox` : 'md-checkbox'}/>
   ),
 };
 
@@ -63,9 +63,9 @@ const SettingsStack = createStackNavigator(
 
 SettingsStack.navigationOptions = {
   tabBarLabel: ({ focused }) => (
-    <Text style={{alignSelf:'center', marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Settings</Text>),  
+    <Text style={{alignSelf:'center', marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Menu</Text>),  
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-menu' : 'md-menu '} />
   ),
 };
 
