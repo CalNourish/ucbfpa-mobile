@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   Dimensions,
   ScrollView,
   StyleSheet,
@@ -11,8 +10,8 @@ import {
 import { Icon } from 'react-native-elements';
 import { RFValue } from "react-native-responsive-fontsize";
 import * as firebase from 'firebase';
-import Icons from '../constants/Icons';
 import Colors from '../constants/Colors';
+import Icons from '../constants/Icons';
 
 export default class InventoryByCategoryScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
