@@ -3,9 +3,10 @@ import { Platform, Text } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import TabBarIcon from '../components/TabBarIcon';
 import HomeScreen from '../screens/HomeScreen';
-import InventoryByCategoryScreen from '../screens/InventoryByCategoryScreen';
 import HoursScreen from '../screens/HoursScreen';
+import InventoryByCategoryScreen from '../screens/InventoryByCategoryScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
+import SettingsScreen from '../screens/SettingsScreen';
 import Colors from '../constants/Colors';
 
 const config = Platform.select({
@@ -48,27 +49,28 @@ HoursStack.navigationOptions = {
 
 HoursStack.path = '';
 
-const NotificationsStack = createStackNavigator(
+const SettingsStack = createStackNavigator(
   {
+    Settings: SettingsScreen,
     Notifications: NotificationsScreen,
   },
   config
 );
 
-NotificationsStack.navigationOptions = {
+SettingsStack.navigationOptions = {
   tabBarLabel: ({ focused }) => (
-    <Text style={{alignSelf:'center', marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Notifications</Text>),  
+    <Text style={{alignSelf:'center', marginBottom: 3, fontSize: 12, color: focused ? Colors.tabIconSelected : Colors.tabIconDefault}}>Settings</Text>),  
   tabBarIcon: ({ focused }) => (
-    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-notifications' : 'md-notifications'} />
+    <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-settings' : 'md-settings'} />
   ),
 };
 
-NotificationsStack.path = '';
+SettingsStack.path = '';
 
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   HoursStack,
-  NotificationsStack,
+  SettingsStack,
 });
 
 tabNavigator.path = '';
