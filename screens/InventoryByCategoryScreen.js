@@ -9,7 +9,9 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { RFValue } from "react-native-responsive-fontsize";
+
 import * as firebase from 'firebase';
+
 import Colors from '../constants/Colors';
 import Icons from '../constants/Icons';
 

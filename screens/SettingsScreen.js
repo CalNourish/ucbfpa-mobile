@@ -7,6 +7,7 @@ import {
 } from 'react-native';
 import { RFValue } from "react-native-responsive-fontsize";
 import SettingsList from 'react-native-settings-list';
+
 import Colors from '../constants/Colors';
 
 export default class SettingsScreen extends React.Component {

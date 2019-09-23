@@ -6,7 +6,9 @@ import {
   View,
 } from 'react-native';
 import { RFValue } from "react-native-responsive-fontsize";
+
 import * as firebase from 'firebase';
+
 import Days from '../constants/Days';
 import Icons from '../constants/Icons';
 

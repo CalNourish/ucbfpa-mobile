@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Dimensions,
   ScrollView,
   StyleSheet,
   Text,
@@ -9,9 +8,11 @@ import {
 } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { RFValue } from "react-native-responsive-fontsize";
+
 import * as firebase from 'firebase';
-import Icons from '../constants/Icons'
+
 import Colors from '../constants/Colors';
+import Icons from '../constants/Icons'
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {

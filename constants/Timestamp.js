@@ -1,6 +1,5 @@
 const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];    
 
-
 export function parseTimestamp(timestamp) {
     let month = timestamp.slice(5,7);
     let date = timestamp.slice(8,10);
