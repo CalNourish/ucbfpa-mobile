@@ -1,13 +1,16 @@
 import React from 'react';
 import { Platform, Text } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
+
 import TabBarIcon from '../components/TabBarIcon';
+import Colors from '../constants/Colors';
+
 import HomeScreen from '../screens/HomeScreen';
 import HoursScreen from '../screens/HoursScreen';
 import InventoryByCategoryScreen from '../screens/InventoryByCategoryScreen';
 import NotificationsScreen from '../screens/NotificationsScreen';
+import PrivacyScreen from '../screens/PrivacyScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-import Colors from '../constants/Colors';
 
 const config = Platform.select({
   web: { headerMode: 'screen' },
@@ -53,6 +56,7 @@ const SettingsStack = createStackNavigator(
   {
     Settings: SettingsScreen,
     Notifications: NotificationsScreen,
+    Privacy: PrivacyScreen,
   },
   config
 );

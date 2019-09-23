@@ -32,7 +32,7 @@ export default class SettingsScreen extends React.Component {
             <SettingsList.Item
               itemWidth={RFValue(50)}
               title='Privacy Policy'
-              onPress={() => console.log("Hello")}
+              onPress={() => this.props.navigation.navigate('Privacy')}
             />
           </SettingsList>
         </ScrollView>
