@@ -9,8 +9,11 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.0.2",
+
     "orientation": "portrait",
+    "icon":"./assets/images/icon_blue.png",
+
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -28,6 +31,7 @@
       "bundleIdentifier": "com.calnourish.mobile"
     },
     "android": {
+      "versionCode": 2,
       "icon":"./assets/images/icon_blue.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
