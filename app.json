@@ -9,9 +9,11 @@
       "android",
       "web"
     ],
-    "version": "1.0.0",
+    "version": "1.0.2",
+
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon":"./assets/images/icon_blue.png",
+
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -24,10 +26,17 @@
       "**/*"
     ],
     "ios": {
+      "icon":"./assets/images/icon_blue.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.calnourish.mobile"
     },
     "android": {
+      "versionCode": 2,
+      "icon":"./assets/images/icon_blue.png",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#1c3664"
+      },
       "package": "com.calnourish.mobile",
       "googleServicesFile": "./google-services.json" 
     }
