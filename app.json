@@ -3,17 +3,14 @@
     "name": "UC Berkeley Food Pantry",
     "slug": "ucbfpa-mobile",
     "privacy": "public",
-    "sdkVersion": "34.0.0",
     "platforms": [
       "ios",
       "android",
       "web"
     ],
     "version": "1.0.2",
-
     "orientation": "portrait",
-    "icon":"./assets/images/icon_blue.png",
-
+    "icon": "./assets/images/icon_blue.png",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
@@ -26,19 +23,19 @@
       "**/*"
     ],
     "ios": {
-      "icon":"./assets/images/icon_blue.png",
+      "icon": "./assets/images/icon_blue.png",
       "supportsTablet": true,
       "bundleIdentifier": "com.calnourish.mobile"
     },
     "android": {
       "versionCode": 2,
-      "icon":"./assets/images/icon_blue.png",
+      "icon": "./assets/images/icon_blue.png",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/icon.png",
         "backgroundColor": "#1c3664"
       },
       "package": "com.calnourish.mobile",
-      "googleServicesFile": "./google-services.json" 
+      "googleServicesFile": "./google-services.json"
     }
   }
 }
